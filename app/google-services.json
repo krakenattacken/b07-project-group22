@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1070518906925",
+    "firebase_url": "https://bo7app-default-rtdb.firebaseio.com",
+    "project_id": "bo7app",
+    "storage_bucket": "bo7app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070518906925:android:64a354463edd2b6003c8a4",
+        "android_client_info": {
+          "package_name": "com.example.b07finalproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaGgclfjhc7OmHa10fBeAXgirYSS53vXM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
