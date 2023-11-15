@@ -16,9 +16,14 @@
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_slideshow" />
-        <!-- new variables are below -->
+
         <item
             android:id="@+id/nav_post_checker"
             android:title="@string/menu_post" />
+
+
+        <item
+            android:id="@+id/nav_new_events"
+            android:title="@string/menu_new_events" />
     </group>
 </menu>

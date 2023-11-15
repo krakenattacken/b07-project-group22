@@ -23,7 +23,6 @@
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 
-    <!-- new variables are below -->
     <fragment
         android:id="@+id/nav_post_checker"
         android:name="com.example.b07finalproject.ui.postChecker.POStChecker"
@@ -48,5 +47,20 @@
         android:name="com.example.b07finalproject.ui.postChecker.POStResult"
         android:label="@string/post_questions"
         tools:layout="@layout/fragment_post_result" />
+
+    <fragment
+        android:id="@+id/nav_new_events"
+        android:name="com.example.b07finalproject.ui.events.NewEventFragment"
+        android:label="@string/menu_new_events"
+        tools:layout="@layout/fragment_new_event">
+        <action
+            android:id="@+id/action_newevents_to_eventitem"
+            app:destination="@+id/new_event_item"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/new_event_item"
+        android:name="com.example.b07finalproject.ui.events.NewEventItemFragment"
+        tools:layout="@layout/fragment_event_item"/>
 
 </navigation>
