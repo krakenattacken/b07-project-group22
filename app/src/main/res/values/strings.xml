@@ -10,6 +10,29 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <!--POSt checker-->
+    <string name="post_title">POSt Checker</string>
+    <string name="post_question">What is your admission category?</string>
+    <string name="computer_science">Computer Science</string>
+    <string name="math">Mathematics</string>
+    <string name="statistics">Statistics</string>
+    <!-- array for dropdown -->
+    <string-array name="category_array">
+        <item>@string/computer_science</item>
+        <item>@string/math</item>
+        <item>@string/statistics</item>
+    </string-array>
+    <string name="menu_post">POSt Checker</string>
+    <string name="next">next</string>
+    <string name="submit">submit</string>
+    <string name="post_questions">POSt Questions</string>
+    <!-- texts to be modified -->
+    <string name="selected_category_title">Computer Science Selected</string>
+    <string name="post_success_message">Congratulations! You meet the POSt requirements!</string>
+    <string name="post_fail_message">Unfortunately, you are not qualified for the POSt...</string>
+
+  
     <string name="menu_new_events">Upcoming Events</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
