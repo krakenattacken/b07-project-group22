@@ -22,4 +22,31 @@
         android:name="com.example.b07finalproject.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
+    <!-- new variables are below -->
+    <fragment
+        android:id="@+id/nav_post_checker"
+        android:name="com.example.b07finalproject.ui.postChecker.POStChecker"
+        android:label="@string/menu_post"
+        tools:layout="@layout/fragment_post_checker">
+
+        <action
+            android:id="@+id/action_post_checker_to_post_questions"
+            app:destination="@id/nav_post_questions" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_post_questions"
+        android:name="com.example.b07finalproject.ui.postChecker.POStQuestionsFragment"
+        android:label="@string/post_questions"
+        tools:layout="@layout/fragment_post_questions">
+        <action
+            android:id="@+id/action_post_questions_to_post_result"
+            app:destination="@id/nav_post_result" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_post_result"
+        android:name="com.example.b07finalproject.ui.postChecker.POStResult"
+        android:label="@string/post_questions"
+        tools:layout="@layout/fragment_post_result" />
+
 </navigation>
