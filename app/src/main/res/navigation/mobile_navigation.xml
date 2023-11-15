@@ -22,6 +22,11 @@
         android:name="com.example.b07finalproject.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id = "@+id/nav_complaint"
+        android:name = "com.example.b07finalproject.ui.complaint.ComplaintFragment"
+        android:label="Complaint"
+        tools:layout = "@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_login"
@@ -69,5 +74,6 @@
         android:id="@+id/new_event_item"
         android:name="com.example.b07finalproject.ui.events.NewEventItemFragment"
         tools:layout="@layout/fragment_event_item"/>
+
 
 </navigation>

@@ -41,6 +41,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.navigation:navigation-fragment:2.7.5")
     implementation("androidx.navigation:navigation-ui:2.7.5")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+
 
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
     implementation("com.google.firebase:firebase-analytics")
