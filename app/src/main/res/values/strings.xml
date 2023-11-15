@@ -11,6 +11,12 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
 
+    <string name="menu_announcements">Announcements</string>
+    <string name="menu_postannoun">Post Announcements</string>
+
+    <string name="post_button">New Announcement</string>
+    <string name="menu_new_announcements">New announcemnets 2.0</string>
+
     <string name="text_complaint">This is Complaint fragment.</string>
     <string name="complaint_disclaimer">Your feedback will remain anonymous. Onc you hit submit, you will not be able to view your complaint again.</string>
 
