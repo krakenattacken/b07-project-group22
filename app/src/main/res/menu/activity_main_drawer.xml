@@ -19,5 +19,14 @@
         <item
             android:id = "@+id/nav_complaint"
             android:title = "Complaint" />
+        <item
+            android:id="@+id/nav_post_checker"
+            android:title="@string/menu_post" />
+
+
+        <item
+            android:id="@+id/nav_new_events"
+            android:title="@string/menu_new_events" />
+
     </group>
 </menu>
