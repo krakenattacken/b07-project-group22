@@ -17,5 +17,13 @@
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="button_login">Login</string>
+    <string name="button_sign_up">Sign Up</string>
+    <string name="button_admin">Sign up as Admin</string>
+    <string name="empty_name">Username required.</string>
+    <string name="empty_password">Password required.</string>
+    <string name="username_incorrect">Username could not be found.</string>
+    <string name="password_incorrect">Incorrect password.</string>
+    <string name="username_taken">That username is already taken.</string>
+    <string name="welcome_user">Welcome, </string>
 
 </resources>
