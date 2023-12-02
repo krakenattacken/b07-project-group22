@@ -1,5 +1,5 @@
 package com.example.b07finalproject.ui.announcements;
-/*
+
 import android.content.Context;
 import android.text.Layout;
 import android.view.LayoutInflater;
@@ -47,10 +47,6 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
                 }
             });
         }
-
-        private int getBindingAdapterPosition() {
-            return -1;      //NO_POSITION
-        }
     }
     public void setAnnouncements(List<Announcement> announcements){
         // will probably be changed
@@ -64,7 +60,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View announView = inflater.inflate(R.layout.announcement_view_item, parent, false);
+        View announView = inflater.inflate(R.layout.announ_view_item, parent, false);
 
         return new ViewHolder(announView, onItemClickListener);
     }
@@ -85,5 +81,5 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
 
 }
 
- */
+
 

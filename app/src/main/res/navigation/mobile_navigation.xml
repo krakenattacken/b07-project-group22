@@ -27,7 +27,7 @@
         android:id="@+id/nav_announcements"
         android:name="com.example.b07finalproject.ui.announcements.AnnouncementsFragment"
         android:label="@string/menu_announcements"
-        tools:layout="@layout/fragment_announcements" >
+        tools:layout="@layout/announ_view_item" >
         <action
             android:id="@+id/action_nav_announcements_to_nav_postannoun"
             app:destination="@id/nav_postannoun" />
@@ -36,9 +36,9 @@
 
     <fragment
         android:id="@+id/nav_postannoun"
-        android:name="com.example.b07finalproject.ui.postannoun.PostAnnounFragment"
+        android:name="com.example.b07finalproject.ui.announcements.PostAnnounFragment"
         android:label="@string/menu_postannoun"
-        tools:layout="@layout/fragment_postannoun" >
+        tools:layout="@layout/fragment_new_announ" >
         <action
             android:id="@+id/action_nav_postannoun_to_nav_announcements"
             app:destination="@id/nav_announcements" />
