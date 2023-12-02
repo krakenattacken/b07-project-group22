@@ -42,6 +42,22 @@ public class Occasion {
         return location;
     }
 
+    public String getDescription() { return description; }
+
+    @Override   //equals method should be added and modified in Announcements and Events
+    public boolean equals(Object obj) {
+        if (obj == null){
+            return false;
+        }
+        if (!(obj instanceof Occasion)){
+            return false;
+        }
+
+        Occasion other = (Occasion) obj;
+
+        return (other.name == this.name && other.dateTime == this.dateTime && other.location == this.location && other.description == this.description);
+    }
+
 
 
 
