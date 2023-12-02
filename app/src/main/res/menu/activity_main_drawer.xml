@@ -18,6 +18,13 @@
             android:title="@string/menu_slideshow" />
         <item
             android:id = "@+id/nav_complaint"
+            android:icon = "@android:drawable/ic_dialog_email"
             android:title = "Complaint" />
+        <item
+            android:id="@+id/nav_complaintlist"
+            android:icon="@drawable/baseline_view_list_24"
+            android:title="Complaint List" />
+
+
     </group>
 </menu>
