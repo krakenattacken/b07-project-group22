@@ -22,7 +22,6 @@ public class loginModel {
     public void queryDB(loginPresenter presenter, String username, String password){
         DatabaseReference ref = db.getReference();
         DatabaseReference query = ref.child("users").child(username);
-
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -41,6 +40,7 @@ public class loginModel {
                     return;
                 }
                 presenter.setUsernameError(R.string.username_incorrect);
+                return;
             }
 
             @Override
@@ -78,10 +78,10 @@ public class loginModel {
 
         if (isAdmin){
             newUserRef.child("isAdmin").setValue(true);
-            newUser = new Admin(username);
+            newUser = new Admin(username, password);
         }
         else{
-            newUser = new Student(username);
+            newUser = new Student(username, password);
         }
         newUserRef.child(password).setValue(newUser);
         presenter.login(newUser);

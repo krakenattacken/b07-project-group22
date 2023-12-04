@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.b07finalproject.ui.login.Admin;
 import com.example.b07finalproject.ui.login.User;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -56,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
         //shared viewmodel stuff
         viewModel = new ViewModelProvider(this).get(mainViewModel.class);
-        User currentUser = viewModel.currentUser;
     }
 
     @Override

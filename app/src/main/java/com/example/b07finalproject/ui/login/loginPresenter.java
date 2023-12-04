@@ -50,7 +50,6 @@ public class loginPresenter {
     }
 
     public void login(User user){
-        //something here to set stuff to the new user
         Toast.makeText(view.getContext(), view.getResources().getString(R.string.welcome_user)
                         + " " + user + "!", Toast.LENGTH_SHORT).show();
         NavHostFragment.findNavController(view).navigate(R.id.nav_home);
