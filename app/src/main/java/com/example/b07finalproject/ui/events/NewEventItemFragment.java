@@ -22,12 +22,8 @@ import com.example.b07finalproject.R;
 import com.example.b07finalproject.ui.login.Admin;
 import com.example.b07finalproject.ui.login.Student;
 import com.example.b07finalproject.ui.login.User;
-import com.example.b07finalproject.ui.postChecker.GradeException;
-import com.example.b07finalproject.ui.postChecker.POStQuestionsFragment;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -138,14 +134,23 @@ public class NewEventItemFragment extends Fragment {
                         //Bundle bundle = new Bundle();
                         //bundle.putSerializable("event", (Serializable) event);
 
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("event", event);
-                        bundle.putSerializable("user", user);
+                        if (LocalDateTime.now().compareTo(event.getDateTime()) < 0) {
+                            Toast.makeText(getContext(),
+                                    "Please wait until the event is done!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("event", event);
+                            bundle.putSerializable("user", user);
 
-                        NavHostFragment.findNavController(NewEventItemFragment.this)
-                                .navigate(R.id.action_eventitem_to_feedback, bundle);
+                            NavHostFragment.findNavController(NewEventItemFragment.this)
+                                    .navigate(R.id.action_eventitem_to_feedback, bundle);
+                        }
+
                     }
                 });
+
             }
         }
 

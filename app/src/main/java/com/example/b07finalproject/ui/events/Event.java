@@ -43,6 +43,10 @@ public class Event implements Serializable {
         return dateTime.format(formatter);
     }
 
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
     public String getLocation() {
         return location;
     }

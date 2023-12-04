@@ -73,7 +73,7 @@ public class NewEventFragment extends Fragment implements OnItemClickListener{
 
         eventList = Event.createEventList(5);
         user = new Admin();
-        //user = new Student();
+        user = new Student();
 
         if (user instanceof Admin) {
             View appBarMainView = requireActivity().findViewById(R.id.app_bar_main);
