@@ -43,6 +43,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui:2.7.5")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
+    implementation("androidx.recyclerview:recyclerview:1.3.0")
 
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
     implementation("com.google.firebase:firebase-analytics")

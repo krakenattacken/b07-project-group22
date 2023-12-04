@@ -9,7 +9,15 @@
         android:id="@+id/nav_home"
         android:name="com.example.b07finalproject.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home"
+        >
+        <action
+            android:id="@+id/action_nav_home_to_nav_complaint"
+            app:destination="@id/nav_complaint" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_complaintlist"
+            app:destination="@id/nav_complaintlist" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_gallery"
@@ -49,6 +57,25 @@
         android:id = "@+id/nav_complaint"
         android:name = "com.example.b07finalproject.ui.complaint.ComplaintFragment"
         android:label="Complaint"
+
+        tools:layout = "@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_nav_complaint_to_nav_submission"
+            app:destination="@id/nav_submission" />
+    </fragment>
+    <fragment
+        android:id = "@+id/nav_submission"
+        android:name="com.example.b07finalproject.ui.complaint.SubmissionFragment"
+        android:layout = "@layout/fragment_complaint" >
+        <action
+            android:id="@+id/action_nav_submission_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id = "@+id/nav_complaintlist"
+        android:name="com.example.b07finalproject.ui.complaintlist.ComplaintListFragment"
+        android:layout = "@layout/fragment_complaint_list" />
+
         tools:layout = "@layout/fragment_gallery" />
 
     <fragment
