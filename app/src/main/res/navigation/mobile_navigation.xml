@@ -10,7 +10,14 @@
         android:name="com.example.b07finalproject.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home"
-        />
+        >
+        <action
+            android:id="@+id/action_nav_home_to_nav_complaint"
+            app:destination="@id/nav_complaint" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_complaintlist"
+            app:destination="@id/nav_complaintlist" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_gallery"

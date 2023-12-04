@@ -54,10 +54,10 @@ public class ComplaintFragment extends Fragment {
             public void onClick(View v) {
                 String heading = EdTxtHeading.getText().toString();
                 String body = EdTxtBody.getText().toString();
-                Log.d("heading", heading);
                 if (heading.equals("") == false && body.equals("") == false) {
                     NavHostFragment.findNavController(ComplaintFragment.this)
                             .navigate(R.id.action_nav_complaint_to_nav_submission);
+                    Complaint complaint = new Complaint(heading, body);
                 } else {
                     Toast fillText = Toast.makeText(getActivity(), "Please fill in the required fields", Toast.LENGTH_SHORT);
                     fillText.show();

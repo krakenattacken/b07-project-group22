@@ -19,4 +19,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/complaintButton"
+        android:layout_width="66dp"
+        android:layout_height="41dp"
+        android:backgroundTint="#F35618"
+        android:text="S"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.908"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.953"
+        app:rippleColor="#FA0202" />
+
+    <Button
+        android:id="@+id/complaintListButton"
+        android:layout_width="73dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="39dp"
+        android:backgroundTint="#F35618"
+        android:text="A"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/complaintButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.953"
+        app:rippleColor="#FA0202" />
 </androidx.constraintlayout.widget.ConstraintLayout>

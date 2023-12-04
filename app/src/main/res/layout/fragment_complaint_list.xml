@@ -23,7 +23,7 @@
     <ListView
         android:layout_width="409dp"
         android:layout_height="680dp"
-        android:entries="@array/complaints"
+
         android:id = "@+id/listview"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -15,7 +15,7 @@
     <string name="text_complaint">This is Complaint fragment.</string>
     <string name="complaint_disclaimer">Your feedback will remain anonymous. Once you hit submit, you will not be able to view your complaint again.</string>
     <string name="submission_message">Thank you for submitting your feedback! Your comments have been recorded and you may navigate away now!</string>
-    <array name = "complaints">
+    <array name="complaints">
         <item>Complaint 1</item>
         <item>Complaint 2</item>
     </array>
