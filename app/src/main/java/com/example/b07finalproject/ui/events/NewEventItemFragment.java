@@ -15,9 +15,13 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.b07finalproject.R;
+import com.example.b07finalproject.ui.login.Admin;
+import com.example.b07finalproject.ui.login.Student;
+import com.example.b07finalproject.ui.login.User;
 import com.example.b07finalproject.ui.postChecker.GradeException;
 import com.example.b07finalproject.ui.postChecker.POStQuestionsFragment;
 
@@ -32,33 +36,17 @@ import java.util.Arrays;
  */
 public class NewEventItemFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Event event;
+    private User user;
+    private boolean attendEvent;
 
     public NewEventItemFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EventItemFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static NewEventItemFragment newInstance(String param1, String param2) {
         NewEventItemFragment fragment = new NewEventItemFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -66,10 +54,6 @@ public class NewEventItemFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -79,39 +63,109 @@ public class NewEventItemFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_event_item, container, false);
     }
 
+    private TextView newTextView(View view, int textViewID) {
+        TextView textView = view.findViewById(textViewID);
+
+        return textView;
+    }
+
+    private void updateLayout() {
+        TextView eventName = newTextView(getView(), R.id.item_event_title);
+        TextView eventDescription = newTextView(getView(), R.id.item_event_description);
+        TextView eventTime = newTextView(getView(), R.id.event_time_tv);
+        TextView eventLocation = newTextView(getView(), R.id.event_location_tv);
+
+        eventName.setText(event.getName());
+        eventDescription.setText(event.getDescription());
+        eventTime.setText(event.getTime());
+        eventLocation.setText(event.getLocation());
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            event = (Event) bundle.getSerializable("clicked_event");
+            user = (User) bundle.getSerializable("user");
+        }
 
+        updateLayout();
 
-        //Add button
-        Button button = view.findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Event event = new Event("BDay", LocalDateTime.now(), "UTSC",
-                        "Dog run", 100, 100);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("event", (Serializable) event);
+        if (user instanceof Student) {
+            if (! ((Student) user).getEventsToAttend().contains(event)) {
+                //Toast.makeText(getContext(), "hello", Toast.LENGTH_SHORT).show();
+                TextView rsvp = newTextView(getView(), R.id.student_rsvp);
+                rsvp.setText("Are you interested in the event?");
+                CheckBox rsvpCheck = view.findViewById(R.id.rsvp_response);
+                rsvpCheck.setVisibility(View.VISIBLE);
 
-                NavHostFragment.findNavController(NewEventItemFragment.this)
-                        .navigate(R.id.action_eventitem_to_feedback, bundle);
+                rsvpCheck.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    if (isChecked) {
+                        attendEvent = true;
+                    }
+                    else {
+                        attendEvent = false;
+                    }
+                });
+
+                Button button = view.findViewById(R.id.button);
+                button.setText("Submit RSVP");
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (attendEvent) {
+                            ((Student) user).acceptRSVP(event);
+                        }
+
+                        Bundle bundle = new Bundle();
+                        bundle.putBoolean("status", attendEvent);
+                        NavHostFragment.findNavController(NewEventItemFragment.this)
+                                .navigate(R.id.action_eventitem_to_rsvp_received, bundle);
+                    }
+                });
             }
-        });
+            else {
+                //Add button
+                Button button = view.findViewById(R.id.button);
+                button.setText("Send Feedback");
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //Event event = new Event("BDay", LocalDateTime.now(), "UTSC",
+                        //"Dog run", 100, 100);
+                        //Bundle bundle = new Bundle();
+                        //bundle.putSerializable("event", (Serializable) event);
 
-        Button button2 = view.findViewById(R.id.button2);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Event event = new Event("BDay", LocalDateTime.now(), "UTSC",
-                        "Dog run", 100, 100);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("event", (Serializable) event);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("event", event);
+                        bundle.putSerializable("user", user);
 
-                NavHostFragment.findNavController(NewEventItemFragment.this)
-                        .navigate(R.id.action_eventitem_to_admin_feedback, bundle);
+                        NavHostFragment.findNavController(NewEventItemFragment.this)
+                                .navigate(R.id.action_eventitem_to_feedback, bundle);
+                    }
+                });
             }
-        });
+        }
+
+        else if (user instanceof Admin) {
+            Button button = view.findViewById(R.id.button);
+            button.setText("View Feedback");
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Event event = new Event("BDay", LocalDateTime.now(), "UTSC",
+                            //"Dog run", 100, 100);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("event", event);
+                    bundle.putSerializable("user", user);
+
+                    NavHostFragment.findNavController(NewEventItemFragment.this)
+                            .navigate(R.id.action_eventitem_to_admin_feedback, bundle);
+                }
+            });
+        }
+
     }
 }

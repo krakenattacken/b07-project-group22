@@ -1,11 +1,14 @@
 package com.example.b07finalproject.ui.events;
 
+import com.example.b07finalproject.ui.login.Student;
+
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 //note: will likely make a superclass for event and announcement...
@@ -14,17 +17,18 @@ public class Event implements Serializable {
     private LocalDateTime dateTime;
     private String location;
     private String description;
+    private HashSet<Student> students;
     private int attendees;
     private int capacity;
 
     public Event() {
     }
-    public Event(String name, LocalDateTime dateTime, String location, String description, int attendees, int capacity) {
+    public Event(String name, LocalDateTime dateTime,
+                 String location, String description, int capacity) {
         this.name = name;
         this.dateTime = dateTime;
         this.location = location;
         this.description = description;
-        this.attendees = attendees;
         this.capacity = capacity;
     }
 
@@ -43,24 +47,50 @@ public class Event implements Serializable {
         return location;
     }
 
-    public boolean isFull() {
-        return attendees == capacity;
+    public String getDescription() { return description;}
+
+    public int getAttendees() { return attendees;}
+
+    public int getCapacity() { return capacity;}
+
+    public boolean hasSpace() {
+        return attendees < capacity;
+    }
+
+    public void attendeesIncreased(Student student) {
+        attendees++;
+        students.add(student);
+    }
+
+    public void attendeesDecreased(Student student) {
+        attendees--;
+        students.remove(student);
     }
 
     //to do when firebase db gets made (for now, just a tester)
     public static List<Event> createEventList(int numEvents) {
         List<Event> events = new ArrayList<Event>();
         LocalDateTime now = LocalDateTime.now();
-        Event event1 = new Event("Event 1", now, "Location 1", "Description 1", 100, 150);
-        Event event2 = new Event("Event 2", now.plusDays(1), "Location 2", "Description 2", 50, 70);
-        Event event3 = new Event("Event 1", now, "Location 1", "Description 1", 100, 150);
-        Event event4 = new Event("Event 2", now.plusDays(1), "Location 2", "Description 2", 50, 70);
-        Event event5 = new Event("Event 1", now, "Location 1", "Description 1", 100, 150);
-        Event event6 = new Event("Event 2", now.plusDays(1), "Location 2", "Description 2", 50, 70);
-        Event event7 = new Event("Event 1", now, "Location 1", "Description 1", 100, 150);
-        Event event8 = new Event("Event 2", now.plusDays(1), "Location 2", "Description 2", 50, 70);
-        Event event9 = new Event("Event 1", now, "Location 1", "Description 1", 100, 150);
-        Event event10 = new Event("Event 2", now.plusDays(1), "Location 2", "Description 2", 50, 70);
+        Event event1 = new Event("Event 1", now, "Location 1",
+                "Description 1", 150);
+        Event event2 = new Event("Event 2", now.plusDays(1), "Location 2",
+                "Description 2" , 70);
+        Event event3 = new Event("Event 1", now, "Location 1",
+                "Description 1", 150);
+        Event event4 = new Event("Event 2", now.plusDays(1), "Location 2",
+                "Description 2", 70);
+        Event event5 = new Event("Event 1", now, "Location 1",
+                "Description 1", 150);
+        Event event6 = new Event("Event 2", now.plusDays(1), "Location 2",
+                "Description 2", 70);
+        Event event7 = new Event("Event 1", now, "Location 1",
+                "Description 1", 150);
+        Event event8 = new Event("Event 2", now.plusDays(1), "Location 2",
+                "Description 2", 70);
+        Event event9 = new Event("Event 1", now, "Location 1",
+                "Description 1", 150);
+        Event event10 = new Event("Event 2", now.plusDays(1), "Location 2",
+                "Description 2", 70);
         events.add(event1);
         events.add(event2);
         events.add(event3);

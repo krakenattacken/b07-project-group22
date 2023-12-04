@@ -13,7 +13,7 @@ public class EventStats {
         int count = 0;
 
         for (EventFeedback eventFeedback : eventFeedbacks) {
-            if (eventFeedback.event.equals(event)) {
+            if (eventFeedback.getEvent().equals(event)) {
                 count ++;
             }
         }
@@ -24,8 +24,8 @@ public class EventStats {
         double sum = 0;
 
         for (EventFeedback eventFeedback : eventFeedbacks) {
-            if (eventFeedback.event.equals(event)) {
-                sum += eventFeedback.rating;
+            if (eventFeedback.getEvent().equals(event)) {
+                sum += eventFeedback.getRating();
                 count ++;
             }
         }
@@ -36,16 +36,11 @@ public class EventStats {
         ArrayList<String> commentsArray = new ArrayList<>();
         String[] comments;
         for (EventFeedback eventFeedback : eventFeedbacks) {
-            if (eventFeedback.event.equals(event)) {
-                commentsArray.add(eventFeedback.comment);
+            if (eventFeedback.getEvent().equals(event)) {
+                commentsArray.add(eventFeedback.getComment());
             }
         }
-        comments = new String[commentsArray.size()];
 
-        for (int i = 0; i < comments.length; i++) {
-            comments[i] = commentsArray.get(i);
-        }
-
-        return comments;
+        return commentsArray.toArray(new String[0]);
     }
 }

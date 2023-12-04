@@ -18,10 +18,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.b07finalproject.R;
+import com.example.b07finalproject.ui.DBInterface;
 
+import org.checkerframework.checker.units.qual.A;
 import org.w3c.dom.Text;
 
 import java.time.LocalDateTime;
+
+import com.example.b07finalproject.ui.login.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.EventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,23 +42,17 @@ import java.time.LocalDateTime;
  */
 public class AdminEventFeedbackFragment extends Fragment {
 
-
-    // TODO: Rename and change types of parameters
+    FirebaseDatabase db;
     private Event event;
+    private User user;
+    ArrayList<EventFeedback> feedbacksList;
 
     public AdminEventFeedbackFragment() {
         // Required empty public constructor
+        //db = FirebaseDatabase.getInstance("https://bo7app-default-rtdb.firebaseio.com/");
+        feedbacksList = new ArrayList<EventFeedback>();
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AdminEventFeedbackFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static AdminEventFeedbackFragment newInstance(String param1, String param2) {
         AdminEventFeedbackFragment fragment = new AdminEventFeedbackFragment();
         Bundle args = new Bundle();
@@ -78,34 +84,45 @@ public class AdminEventFeedbackFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        Toast.makeText(getContext(), "hello", Toast.LENGTH_SHORT).show();
-        event = new Event("BDay", LocalDateTime.now(), "UTSC",
-                "Dog run", 100, 100);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            event = (Event) bundle.getSerializable("event");
+            user = (User) bundle.getSerializable("user");
+        }
 
-        Event event1 = new Event("BDay", LocalDateTime.now(), "UTSC",
-                "Dog run", 100, 100);
-        EventFeedback feedback1 = new EventFeedback(event1, "It was fun", 3);
-        Event event2 = new Event("BDay", LocalDateTime.now(), "UTSC",
-                "Dog run", 100, 100);
-        EventFeedback feedback2 = new EventFeedback(event2, "It was boring", 1);
-        Event event3 = new Event("BDay", LocalDateTime.now(), "UTSC",
-                "Dog run", 100, 100);
-        EventFeedback feedback3 = new EventFeedback(event3, "It was okay", 5);
-        Event event4 = new Event("Gym", LocalDateTime.now(), "UTSC",
-                "Dog run", 100, 100);
-        EventFeedback feedback4 = new EventFeedback(event4, "It was amazing", 5);
-        EventFeedback[] feedbacks = {feedback1, feedback2, feedback3, feedback4};
+        //Toast.makeText(getContext(), "hello", Toast.LENGTH_SHORT).show();
+        //event = new Event("BDay", LocalDateTime.now(), "UTSC",
+                //"Dog run", 100, 100);
+
+        //Event event1 = new Event("BDay", LocalDateTime.now(), "UTSC",
+                //"Dog run", 100, 100);
+        //EventFeedback feedback1 = new EventFeedback(event1, "It was fun", 3);
+        //Event event2 = new Event("BDay", LocalDateTime.now(), "UTSC",
+                //"Dog run", 100, 100);
+        //EventFeedback feedback2 = new EventFeedback(event2, "It was boring", 1);
+        //Event event3 = new Event("BDay", LocalDateTime.now(), "UTSC",
+                //"Dog run", 100, 100);
+        //EventFeedback feedback3 = new EventFeedback(event3, "It was okay", 5);
+        //Event event4 = new Event("Gym", LocalDateTime.now(), "UTSC",
+                //"Dog run", 100, 100);
+        //EventFeedback feedback4 = new EventFeedback(event4, "It was amazing", 5);
+
+        updateLayout();
+
+    }
+
+    private void updateLayout() {
+        EventFeedback[] feedbacks = feedbacksList.toArray(new EventFeedback[0]);
         EventStats stats = new EventStats(feedbacks);
 
 
         // initialize edittext
-        // HERE
-        TextView eventName = newTextView(view, R.id.eventNameTextview);
+        TextView eventName = newTextView(getView(), R.id.eventNameTextview);
 
         eventName.setText(event.getName());
 
 
-        TextView eventCommentsEditor = newTextView(view, R.id.eventComments);
+        TextView eventCommentsEditor = newTextView(getView(), R.id.eventComments);
 
         String[] comments = stats.getComments(event);
         StringBuilder allComments = new StringBuilder();
@@ -120,13 +137,12 @@ public class AdminEventFeedbackFragment extends Fragment {
 
         eventCommentsEditor.setText(allComments);
 
-        TextView eventRatings = newTextView(view, R.id.eventRatings);
+        TextView eventRatings = newTextView(getView(), R.id.eventRatings);
         double averageRating = stats.getAverage(event);
         eventRatings.setText(String.valueOf(averageRating));
 
-        TextView eventCounts = newTextView(view, R.id.eventCounts);
+        TextView eventCounts = newTextView(getView(), R.id.eventCounts);
         int countFeedbacks = stats.getCount(event);
         eventCounts.setText(String.valueOf(countFeedbacks));
-
     }
 }

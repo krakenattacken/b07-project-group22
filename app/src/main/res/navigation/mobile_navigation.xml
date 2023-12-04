@@ -56,6 +56,18 @@
         <action
             android:id="@+id/action_newevents_to_eventitem"
             app:destination="@+id/new_event_item"/>
+        <action
+            android:id="@+id/action_newevents_to_send_rsvp"
+            app:destination="@+id/send_rsvp"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/send_rsvp"
+        android:name="com.example.b07finalproject.ui.events.SendRSVPFragment"
+        tools:layout="@layout/fragment_send_rsvp">
+        <action
+            android:id="@+id/action_send_rsvp_to_submitted"
+            app:destination="@+id/rsvp_submitted"/>
     </fragment>
 
     <fragment
@@ -68,6 +80,9 @@
         <action
             android:id="@+id/action_eventitem_to_admin_feedback"
             app:destination="@+id/admin_event_feedback"/>
+        <action
+            android:id="@+id/action_eventitem_to_rsvp_received"
+            app:destination="@+id/rsvp_result"/>
     <fragment
         android:id="@+id/event_feedback"
         android:name="com.example.b07finalproject.ui.events.EventFeedbackFragment"
@@ -76,4 +91,12 @@
         android:id="@+id/admin_event_feedback"
         android:name="com.example.b07finalproject.ui.events.AdminEventFeedbackFragment"
         tools:layout="@layout/fragment_admin_event_feedback"/>
+    <fragment
+        android:id="@+id/rsvp_result"
+        android:name="com.example.b07finalproject.ui.events.RSVPReceivedFragment"
+        tools:layout="@layout/fragment_rsvp_received"/>
+    <fragment
+        android:id="@+id/rsvp_submitted"
+        android:name="com.example.b07finalproject.ui.events.RSVPSubmittedFragment"
+        tools:layout="@layout/fragment_rsvp_submitted"/>
 </navigation>
