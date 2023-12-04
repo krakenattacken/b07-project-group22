@@ -18,9 +18,14 @@ import android.widget.Spinner;
 import com.example.b07finalproject.R;
 import com.example.b07finalproject.ui.viewmodel.CategoryViewModel;
 import com.example.b07finalproject.ui.viewmodel.SatisfactionViewModel;
+
+import com.example.b07finalproject.ui.viewmodel.SatisfactionViewModel;
+
+import com.example.b07finalproject.ui.complaint.ComplaintFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -28,6 +33,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.b07finalproject.databinding.ActivityMainBinding;
@@ -48,20 +54,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
+
+        /*
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Insert action here", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+
             }
-        });
+
+        }); */
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         // --added post checker--
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_new_events, R.id.nav_post_checker)
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_complaint, R.id.nav_complaintlist, R.id.nav_new_events, R.id.nav_post_checker, R.id.nav_announcements)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);

@@ -6,6 +6,8 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+    <dimen name="text_margin">16dp</dimen>
+
     <!-- new variables are below -->
     <dimen name="title_size">50sp</dimen>
     <dimen name="post_title_adjust">50dp</dimen>
@@ -14,4 +16,5 @@
     <dimen name="checkbox_adjust">20dp</dimen>
     <dimen name="general_pad">10dp</dimen>
     <dimen name="subtitle_size">30dp</dimen>
+
 </resources>

@@ -2,9 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-<<<<<<< HEAD
-=======
     <mapping directory="$PROJECT_DIR$/b07-project-group22" vcs="Git" />
->>>>>>> origin/postCheckerWEventAndFeedback
   </component>
 </project>

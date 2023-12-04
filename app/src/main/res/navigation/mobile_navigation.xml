@@ -9,7 +9,15 @@
         android:id="@+id/nav_home"
         android:name="com.example.b07finalproject.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home"
+        >
+        <action
+            android:id="@+id/action_nav_home_to_nav_complaint"
+            app:destination="@id/nav_complaint" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_complaintlist"
+            app:destination="@id/nav_complaintlist" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_gallery"
@@ -27,7 +35,7 @@
         android:id="@+id/nav_announcements"
         android:name="com.example.b07finalproject.ui.announcements.AnnouncementsFragment"
         android:label="@string/menu_announcements"
-        tools:layout="@layout/fragment_announcements" >
+        tools:layout="@layout/announ_view_item" >
         <action
             android:id="@+id/action_nav_announcements_to_nav_postannoun"
             app:destination="@id/nav_postannoun" />
@@ -36,9 +44,9 @@
 
     <fragment
         android:id="@+id/nav_postannoun"
-        android:name="com.example.b07finalproject.ui.postannoun.PostAnnounFragment"
+        android:name="com.example.b07finalproject.ui.announcements.PostAnnounFragment"
         android:label="@string/menu_postannoun"
-        tools:layout="@layout/fragment_postannoun" >
+        tools:layout="@layout/fragment_new_announ" >
         <action
             android:id="@+id/action_nav_postannoun_to_nav_announcements"
             app:destination="@id/nav_announcements" />
@@ -48,6 +56,25 @@
         android:id = "@+id/nav_complaint"
         android:name = "com.example.b07finalproject.ui.complaint.ComplaintFragment"
         android:label="Complaint"
+
+        tools:layout = "@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_nav_complaint_to_nav_submission"
+            app:destination="@id/nav_submission" />
+    </fragment>
+    <fragment
+        android:id = "@+id/nav_submission"
+        android:name="com.example.b07finalproject.ui.complaint.SubmissionFragment"
+        android:layout = "@layout/fragment_complaint" >
+        <action
+            android:id="@+id/action_nav_submission_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id = "@+id/nav_complaintlist"
+        android:name="com.example.b07finalproject.ui.complaintlist.ComplaintListFragment"
+        android:layout = "@layout/fragment_complaint_list" />
+
         tools:layout = "@layout/fragment_gallery" />
 
     <fragment
