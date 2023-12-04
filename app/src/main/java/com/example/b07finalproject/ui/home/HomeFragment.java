@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,6 +14,7 @@ import com.example.b07finalproject.R;
 import com.example.b07finalproject.databinding.FragmentHomeBinding;
 import com.example.b07finalproject.mainViewModel;
 import com.example.b07finalproject.ui.login.Admin;
+import com.example.b07finalproject.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
@@ -28,6 +28,7 @@ public class HomeFragment extends Fragment {
         viewModel = new ViewModelProvider(getActivity()).get(mainViewModel.class);
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
         final TextView textView = binding.textHome;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
