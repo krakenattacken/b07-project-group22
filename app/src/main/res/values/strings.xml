@@ -32,6 +32,7 @@
     <string name="password_incorrect">Incorrect password.</string>
     <string name="username_taken">That username is already taken.</string>
     <string name="welcome_user">Welcome, </string>
+    <string name="log_out_text">Log Out</string>
 
     <!--POSt checker-->
     <string name="post_title">POSt Checker</string>

@@ -2,13 +2,16 @@ package com.example.b07finalproject.ui.login;
 
 import android.widget.Toast;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.b07finalproject.R;
+import com.example.b07finalproject.mainViewModel;
 
 public class loginPresenter {
     loginModel model;
     loginFragment view;
+    private mainViewModel viewModel;
 
     public loginPresenter(loginModel model, loginFragment view){
         this.model = model;
@@ -47,9 +50,10 @@ public class loginPresenter {
     }
 
     public void login(User user){
-        //something here to set stuff to the new user
         Toast.makeText(view.getContext(), view.getResources().getString(R.string.welcome_user)
                         + " " + user + "!", Toast.LENGTH_SHORT).show();
         NavHostFragment.findNavController(view).navigate(R.id.nav_home);
+        viewModel = new ViewModelProvider(view.getActivity()).get(mainViewModel.class);
+        viewModel.currentUser = user;
     }
 }
