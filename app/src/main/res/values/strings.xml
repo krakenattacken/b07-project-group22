@@ -10,9 +10,64 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Thank you for submitting your feedback!</string>
+    <string name="text_complaint">This is Complaint fragment.</string>
+    <string name="complaint_disclaimer">Your feedback will remain anonymous. Once you hit submit, you will not be able to view your complaint again.</string>
+    <string name="submission_message">Thank you for submitting your feedback! Your comments have been recorded and you may navigate away now!</string>
+    <array name="complaints">
+        <item>Complaint 1</item>
+        <item>Complaint 2</item>
+    </array>
+
     <string name="menu_announcements">Announcements</string>
     <string name="menu_postannoun">Post Announcements</string>
 
     <string name="post_button">New Announcement</string>
     <string name="menu_new_announcements">New announcemnets 2.0</string>
+
+    <string name="text_complaint">This is Complaint fragment.</string>
+    <string name="complaint_disclaimer">Your feedback will remain anonymous. Onc you hit submit, you will not be able to view your complaint again.</string>
+
+    <!-- Below are the strings for the login fragment -->
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="button_login">Login</string>
+    <string name="button_sign_up">Sign Up</string>
+    <string name="button_admin">Sign up as Admin</string>
+    <string name="empty_name">Username required.</string>
+    <string name="empty_password">Password required.</string>
+    <string name="username_incorrect">Username could not be found.</string>
+    <string name="password_incorrect">Incorrect password.</string>
+    <string name="username_taken">That username is already taken.</string>
+    <string name="welcome_user">Welcome, </string>
+    <string name="log_out_text">Log Out</string>
+
+    <!--POSt checker-->
+    <string name="post_title">POSt Checker</string>
+    <string name="post_question">What is your admission category?</string>
+    <string name="computer_science">Computer Science</string>
+    <string name="math">Mathematics</string>
+    <string name="statistics">Statistics</string>
+    <!-- array for dropdown -->
+    <string-array name="category_array">
+        <item>@string/computer_science</item>
+        <item>@string/math</item>
+        <item>@string/statistics</item>
+    </string-array>
+    <string name="menu_post">POSt Checker</string>
+    <string name="next">next</string>
+    <string name="submit">submit</string>
+    <string name="post_questions">POSt Questions</string>
+    <!-- texts to be modified -->
+    <string name="selected_category_title">Computer Science Selected</string>
+    <string name="post_success_message">Congratulations! You meet the POSt requirements!</string>
+    <string name="post_fail_message">Unfortunately, you are not qualified for the POSt...</string>
+
+  
+    <string name="menu_new_events">Upcoming Events</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
