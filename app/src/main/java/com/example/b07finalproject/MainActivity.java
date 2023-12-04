@@ -30,6 +30,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.b07finalproject.databinding.ActivityMainBinding;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
+
         /*
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,14 +67,13 @@ public class MainActivity extends AppCompatActivity {
 
         }); */
 
-
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         // --added post checker--
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_complaint, R.id.nav_complaintlist, R.id.nav_new_events, R.id.nav_post_checker)
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_complaint, R.id.nav_complaintlist, R.id.nav_new_events, R.id.nav_post_checker, R.id.nav_announcements)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);

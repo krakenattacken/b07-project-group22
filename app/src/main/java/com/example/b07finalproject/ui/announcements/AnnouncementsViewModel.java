@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+/*
 
 public class AnnouncementsViewModel extends ViewModel {
 
@@ -19,8 +20,10 @@ public class AnnouncementsViewModel extends ViewModel {
     }
 }
 
+ */
 
-/*
+
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -32,6 +35,8 @@ import java.util.List;
 public class AnnouncementsViewModel extends ViewModel {
     //data for layout checking purposes; will be deleted
     MutableLiveData<List<Announcement>> announList;
+
+
 
     List<Announcement> x;
     Announcement e;
@@ -46,4 +51,3 @@ public class AnnouncementsViewModel extends ViewModel {
     }
 }
 
- */

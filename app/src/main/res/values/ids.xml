@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
- <!--   <item name="announ_location" type="id">location</item>
-    <item name="announ_time" type="id">time</item>
-    <item name="announ_name" type="id">name</item> -->
+    <item name="announ_location" type="id" />
+    <item name="announ_time" type="id" />
+    <item name="announ_name" type="id" />
 </resources>
