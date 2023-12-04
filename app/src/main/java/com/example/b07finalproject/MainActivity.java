@@ -9,6 +9,15 @@ import android.widget.Toast;
 
 import com.example.b07finalproject.ui.login.Admin;
 import com.example.b07finalproject.ui.login.User;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import com.example.b07finalproject.R;
+import com.example.b07finalproject.ui.viewmodel.CategoryViewModel;
+import com.example.b07finalproject.ui.viewmodel.SatisfactionViewModel;
+import com.example.b07finalproject.ui.viewmodel.SatisfactionViewModel;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -27,7 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+
     private mainViewModel viewModel;
+    // added viewModels
+    private CategoryViewModel categoryViewModel;
+    private SatisfactionViewModel satisfactionViewModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +62,21 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
+        // --added post checker--
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_new_events, R.id.nav_post_checker)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
         //shared viewmodel stuff
         viewModel = new ViewModelProvider(this).get(mainViewModel.class);
+        // create viewModel
+        categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
+        satisfactionViewModel = new ViewModelProvider(this).get(SatisfactionViewModel.class);
+
     }
 
     @Override
@@ -72,4 +92,5 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
 }
