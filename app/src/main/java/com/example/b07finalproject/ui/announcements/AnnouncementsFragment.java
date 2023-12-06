@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,26 +17,37 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07finalproject.DBDependent;
 import com.example.b07finalproject.R;
+import com.example.b07finalproject.mainDBModel;
 import com.example.b07finalproject.mainViewModel;
 import com.example.b07finalproject.ui.login.Admin;
 import com.example.b07finalproject.ui.login.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AnnouncementsFragment extends Fragment implements OnItemClickListener, DBDependent {
 
 
-    private AnnouncementsViewModel mViewModel;
+    //private AnnouncementsViewModel mViewModel;
     private List<Announcement> announList;
 
-    PostAnnounFragment postAnnounFragment;
+    //PostAnnounFragment postAnnounFragment;
 
-    public User user;
+    User user;
     private mainViewModel viewModel;
+    private mainDBModel dbModel;
 
     public static AnnouncementsFragment newInstance() {
         return new AnnouncementsFragment();
+    }
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        dbModel = new mainDBModel();
+        viewModel = new ViewModelProvider(requireActivity()).get(mainViewModel.class);
+        user = viewModel.getCurrentUser();
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -55,8 +67,7 @@ public class AnnouncementsFragment extends Fragment implements OnItemClickListen
                 mAdapter.setAnnouncements(announcements);
             }
         });
-
-        viewModel = new ViewModelProvider(getActivity()).get(mainViewModel.class);
+        // viewModel = new ViewModelProvider(getActivity()).get(mainViewModel.class);
 
         return root;
     }
@@ -65,10 +76,17 @@ public class AnnouncementsFragment extends Fragment implements OnItemClickListen
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
         super.onViewCreated(view,savedInstanceState);
+        user = viewModel.getCurrentUser();
+        announList = new ArrayList<Announcement>();
+        dbModel.getAllFromDB("announcements", this, Announcement.class);
+
         View appBarMainView = requireActivity().findViewById(R.id.new_post);
         FloatingActionButton admin_see_button = appBarMainView.findViewById(R.id.new_post);
 
-        user = viewModel.getCurrentUser();
+        //add this
+        announList = Announcement.createAnnouncementList(10);
+
+
 
         if (user instanceof Admin) {
             admin_see_button.setVisibility(View.VISIBLE);
@@ -87,25 +105,41 @@ public class AnnouncementsFragment extends Fragment implements OnItemClickListen
 
     @Override
     public void onItemClick(int position) {
+        /*
+        if (announList == null){
 
-    /*
+        }
+
         Announcement clickedAnnoun = announList.get(position);
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("clicked_announ", clickedAnnoun);
-        bundle.putSerializable("user", (Serializable) user);
+        bundle.putSerializable("user", user);
 
         NavHostFragment.findNavController(AnnouncementsFragment.this)
                 .navigate(R.id.action_nav_announcements_to_nav_postannoun, bundle);
-
 
          */
 
     }
 
 
+
     @Override
-    public void loadDataFromDB(Object[] items) {
+    public void loadDataFromDB(List<Object> items) {
+
+        for (int i = 0; i < items.size(); i++) {
+            Announcement announ = (Announcement) items.get(i);
+            if (announ != null) {
+                LocalDateTime now = LocalDateTime.now();
+                announList.add(announ);
+            }
+        }
+
+        RecyclerView recyclerView = getView().findViewById(R.id.rvNewAnnouncements);
+        AnnouncementAdapter mAdapter = new AnnouncementAdapter(announList, this);
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
     }
 

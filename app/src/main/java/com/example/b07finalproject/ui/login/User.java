@@ -1,6 +1,8 @@
 package com.example.b07finalproject.ui.login;
 
-public abstract class User {
+import java.io.Serializable;
+
+public abstract class User implements Serializable {
     String username;
     String password;
     public User(){

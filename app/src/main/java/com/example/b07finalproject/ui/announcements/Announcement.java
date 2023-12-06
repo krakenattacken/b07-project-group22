@@ -11,6 +11,7 @@ import java.util.List;
 public class Announcement extends Occasion implements Serializable {
 
 
+    public Announcement() {}
 
     public Announcement(String name, String time, String location, String description) {
         super(name,time,location,description);
@@ -25,8 +26,8 @@ public class Announcement extends Occasion implements Serializable {
     //to do when firebase db gets made (for now, just a tester)
     public static List<Announcement> createAnnouncementList(int numAnnoun) {
         List<Announcement> announcements = new ArrayList<Announcement>();
-        LocalDateTime now = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        //LocalDateTime now = null;
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             now = LocalDateTime.now();
         }
         Announcement announ1 = new Announcement("Announ 1", "manually entered time", "Location 1", "Description 1");
@@ -45,8 +46,9 @@ public class Announcement extends Occasion implements Serializable {
         announcements.add(announ3);
         announcements.add(announ4);
         announcements.add(announ5);
+
+         */
         return announcements;
     }
 
 }
-

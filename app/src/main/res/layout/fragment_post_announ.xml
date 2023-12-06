@@ -44,7 +44,9 @@
         android:textColor="#F6F2F2"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionInput"
+        app:layout_constraintVertical_bias="0.952" />
 
     <TextView
         android:id="@+id/textView5"
@@ -83,8 +85,8 @@
 
     <EditText
         android:id="@+id/descriptionInput"
-        android:layout_width="304dp"
-        android:layout_height="267dp"
+        android:layout_width="305dp"
+        android:layout_height="237dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="56dp"
         android:ems="10"
@@ -102,8 +104,20 @@
         android:layout_marginTop="44dp"
         android:layout_marginEnd="60dp"
         android:ems="10"
-        android:inputType="date"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleInput" />
+
+    <TextView
+        android:id="@+id/format"
+        android:layout_width="203dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="60dp"
+        android:fontFamily="monospace"
+        android:text="MMM dd, yyyy HH:mm"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeInput" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

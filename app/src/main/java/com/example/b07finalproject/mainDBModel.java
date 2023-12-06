@@ -9,6 +9,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class mainDBModel {
     FirebaseDatabase db;
 
@@ -30,18 +33,15 @@ public class mainDBModel {
                     presenter.onDBFail("Path is empty");
                     return;
                 }
+                List<Object> itemsList = new ArrayList<>();
 
-                Iterable<DataSnapshot> dbItems = snapshot.getChildren();
-                int counter = 0;
-                for (DataSnapshot i: dbItems) {
-                    counter++;
+
+                for (DataSnapshot shot : snapshot.getChildren()) {
+                    Object item = shot.getValue(itemClass);
+                    itemsList.add(item);
                 }
-                Object[] items = new Object[counter];
-                counter = 0;
-                for (DataSnapshot shot: dbItems) {
-                    items[counter] = shot.getValue(itemClass);
-                }
-                presenter.loadDataFromDB(items);
+
+                presenter.loadDataFromDB(itemsList);
             }
 
             @Override
@@ -53,7 +53,7 @@ public class mainDBModel {
 
     public void tryToAdd(Object item, String path, String id, DBDependent presenter, mainViewModel viewModel){
         DatabaseReference ref = db.getReference().child(path);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(id).exists()){
