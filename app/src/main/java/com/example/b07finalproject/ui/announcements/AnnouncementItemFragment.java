@@ -26,11 +26,9 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 public class AnnouncementItemFragment extends Fragment {
 
-
     private Announcement announcement;
     private User user;
     private mainDBModel dbModel;
-
     public AnnouncementItemFragment() {
         // Required empty public constructor
     }
@@ -45,9 +43,7 @@ public class AnnouncementItemFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         dbModel = new mainDBModel();
-
     }
 
     @Override
