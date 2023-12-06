@@ -1,6 +1,7 @@
 package com.example.b07finalproject;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -13,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class mainDBModel {
     FirebaseDatabase db;
@@ -35,18 +37,14 @@ public class mainDBModel {
                     presenter.onDBFail("Path is empty");
                     return;
                 }
-                Iterable<DataSnapshot> dbItems = snapshot.getChildren();
-                int counter = 0;
-                for (DataSnapshot i: dbItems) {
-                    counter++;
-                }
-                Object[] items = new Object[counter];
-                counter = 0;
-                for (DataSnapshot shot: dbItems) {
-                    items[counter] = shot.getValue(itemClass);
-                    counter++;
-                }
 
+                List<Object> itemsList = new ArrayList<>();
+
+                for (DataSnapshot shot : snapshot.getChildren()) {
+                    Object item = shot.getValue(itemClass);
+                    itemsList.add(item);
+                }
+                presenter.loadDataFromDB(itemsList);
             }
 
             @Override

@@ -3,6 +3,7 @@ package com.example.b07finalproject;
 import androidx.lifecycle.ViewModel;
 
 import com.example.b07finalproject.ui.login.User;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class mainViewModel extends ViewModel {
     public User currentUser;
@@ -26,7 +27,7 @@ public class mainViewModel extends ViewModel {
     -itemClass is the class of the object you want ex Event.class
     Calling this method will then call loadDataFromDB
      */
-    public void getAllFromDB(String path, DBDependent presenter, Class itemClass){
+    public void getAllFromDB(String path, DBDependent presenter, Class itemClass, FirebaseDatabase db){
         model.getAllFromDB(path, presenter, itemClass);
     }
 

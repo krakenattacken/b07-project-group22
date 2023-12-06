@@ -1,8 +1,10 @@
 package com.example.b07finalproject.ui.login;
 
+import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.b07finalproject.R;
@@ -49,6 +51,14 @@ public class loginPresenter {
     }
 
     public void login(User user){
+        Toast.makeText(view.getContext(), view.getResources().getString(R.string.welcome_user)
+                        + " " + user + "!", Toast.LENGTH_SHORT).show();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("user", user);
+
+        NavHostFragment.findNavController(view).navigate(R.id.nav_home, bundle);
+        viewModel = new ViewModelProvider(view.getActivity()).get(mainViewModel.class);
         view.displayLogin(user);
     }
 }

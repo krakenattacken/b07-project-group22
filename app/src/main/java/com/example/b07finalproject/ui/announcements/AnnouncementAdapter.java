@@ -1,7 +1,6 @@
 package com.example.b07finalproject.ui.announcements;
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07finalproject.R;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +17,9 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
     private final OnItemClickListener onItemClickListener;
     private List<Announcement> announcements;
 
-    public AnnouncementAdapter(OnItemClickListener onItemClickListener) {
+    PostAnnounFragment postAnnounFragment;
+
+    public AnnouncementAdapter(List<Announcement> announcements, OnItemClickListener onItemClickListener) {
         this.announcements = new ArrayList<>();
         this.onItemClickListener = onItemClickListener;
     }
@@ -80,6 +79,9 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
 
 
 }
+
+
+
 
 
 

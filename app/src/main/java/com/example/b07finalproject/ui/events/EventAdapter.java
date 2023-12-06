@@ -20,8 +20,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     private final OnItemClickListener onItemClickListener;
     private List<Event> events;
 
-    public EventAdapter(OnItemClickListener onItemClickListener) {
-        this.events = new ArrayList<>();
+    public EventAdapter(List<Event> events, OnItemClickListener onItemClickListener) {
+        this.events = events;
         this.onItemClickListener = onItemClickListener;
     }
     public static class ViewHolder extends RecyclerView.ViewHolder {
