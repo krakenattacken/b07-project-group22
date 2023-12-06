@@ -78,13 +78,18 @@ public class AnnouncementsFragment extends Fragment implements OnItemClickListen
         super.onViewCreated(view,savedInstanceState);
         user = viewModel.getCurrentUser();
         announList = new ArrayList<Announcement>();
+
+        //add this
+        announList = Announcement.createAnnouncementList(1);
+
+
         dbModel.getAllFromDB("announcements", this, Announcement.class);
 
         View appBarMainView = requireActivity().findViewById(R.id.new_post);
         FloatingActionButton admin_see_button = appBarMainView.findViewById(R.id.new_post);
 
-        //add this
-        announList = Announcement.createAnnouncementList(10);
+
+
 
 
 
