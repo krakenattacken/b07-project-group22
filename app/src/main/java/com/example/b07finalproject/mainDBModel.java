@@ -1,5 +1,7 @@
 package com.example.b07finalproject;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.b07finalproject.ui.login.Student;
@@ -26,7 +28,7 @@ public class mainDBModel {
 
     public void getAllFromDB(String path, DBDependent presenter, Class itemClass){
         DatabaseReference ref = db.getReference().child(path);
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.exists()){
@@ -42,8 +44,9 @@ public class mainDBModel {
                 counter = 0;
                 for (DataSnapshot shot: dbItems) {
                     items[counter] = shot.getValue(itemClass);
+                    counter++;
                 }
-                presenter.loadDataFromDB(items);
+
             }
 
             @Override
@@ -53,9 +56,9 @@ public class mainDBModel {
         });
     }
 
-    public void tryToAdd(Object item, String path, String id, DBDependent presenter, mainViewModel viewModel){
+    public void tryToAdd(Object item, String path, String id, DBDependent presenter){
         DatabaseReference ref = db.getReference().child(path);
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(id).exists()){
@@ -69,6 +72,29 @@ public class mainDBModel {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 presenter.onDBFail("Something went wrong");
+            }
+        });
+    }
+
+    public void startNotif(MainActivity main){
+        DatabaseReference ref = db.getReference().child("notifications");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String notifType = snapshot.child("notifs").getValue(String.class);
+                if (!snapshot.exists() ||"".equals(notifType)){
+                    return;
+                }
+                if ("events".equals(notifType)){
+                    main.showNotif(R.string.notif_event);
+                }
+                if ("announcements".equals(notifType) ||"announcement".equals(notifType)){
+                    main.showNotif(R.string.notif_announce);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
             }
         });
     }
