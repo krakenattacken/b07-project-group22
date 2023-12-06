@@ -25,17 +25,4 @@ public class Student extends User{
         return eventsToAttend;
     }
 
-    public void acceptRSVP(Event event) {
-        if (event.hasSpace()) {
-            eventsToAttend.add(event);
-            //event.attendeesIncreased(this);
-            // update event in database
-            // update user
-        }
-    }
-
-    public void declineRSVP(Event event) {
-        eventsToAttend.remove(event);
-        event.attendeesDecreased(this);
-    }
 }

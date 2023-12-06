@@ -55,17 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.appBarMain.toolbar);
 
-        /*
-        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Insert action here", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-
-            }
-
-        }); */
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
@@ -73,7 +62,10 @@ public class MainActivity extends AppCompatActivity {
         // menu should be considered as top level destinations.
         // --added post checker--
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_complaint, R.id.nav_complaintlist, R.id.nav_new_events, R.id.nav_post_checker, R.id.nav_announcements)
+                R.id.nav_home,
+                R.id.nav_complaint, R.id.nav_complaintlist,
+                R.id.nav_new_events, R.id.nav_post_checker,
+                R.id.nav_announcements)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -85,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         // create viewModel
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

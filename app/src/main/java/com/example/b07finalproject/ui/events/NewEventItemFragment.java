@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.b07finalproject.R;
+import com.example.b07finalproject.mainDBModel;
 import com.example.b07finalproject.ui.login.Admin;
 import com.example.b07finalproject.ui.login.Student;
 import com.example.b07finalproject.ui.login.User;
@@ -35,6 +36,7 @@ public class NewEventItemFragment extends Fragment {
     private Event event;
     private User user;
     private boolean attendEvent;
+    private mainDBModel dbModel;
 
     public NewEventItemFragment() {
         // Required empty public constructor
@@ -50,6 +52,7 @@ public class NewEventItemFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbModel = new mainDBModel();
     }
 
     @Override
@@ -90,8 +93,12 @@ public class NewEventItemFragment extends Fragment {
         updateLayout();
 
         if (user instanceof Student) {
-            if (! ((Student) user).getEventsToAttend().contains(event)) {
-                //Toast.makeText(getContext(), "hello", Toast.LENGTH_SHORT).show();
+            Student student = (Student) user;
+            LocalDateTime now = LocalDateTime.now();
+            // ideally only show checkbox if event is after now but
+            // if now is within 5 days after event then you can still receive RSVP
+            if (! event.participating(student) &&
+                    event.toDateTime().isAfter(now.minusDays(5))) {
                 TextView rsvp = newTextView(getView(), R.id.student_rsvp);
                 rsvp.setText("Are you interested in the event?");
                 CheckBox rsvpCheck = view.findViewById(R.id.rsvp_response);
@@ -112,7 +119,16 @@ public class NewEventItemFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         if (attendEvent) {
-                            ((Student) user).acceptRSVP(event);
+                            //((Student) user).acceptRSVP(event);
+                            if (event.hasSpace()) {
+                                event.attendeesIncreased(student);
+                                dbModel.add(event, "events", event.toString());
+                            }
+                            else {
+                                Toast.makeText(getContext(), "Sorry we are full...",
+                                        Toast.LENGTH_SHORT).show();
+                                return;
+                            }
                         }
 
                         Bundle bundle = new Bundle();
@@ -122,19 +138,15 @@ public class NewEventItemFragment extends Fragment {
                     }
                 });
             }
-            else {
+            else if (event.participating(student)){
                 //Add button
                 Button button = view.findViewById(R.id.button);
                 button.setText("Send Feedback");
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //Event event = new Event("BDay", LocalDateTime.now(), "UTSC",
-                        //"Dog run", 100, 100);
-                        //Bundle bundle = new Bundle();
-                        //bundle.putSerializable("event", (Serializable) event);
 
-                        if (LocalDateTime.now().compareTo(event.getDateTime()) < 0) {
+                        if (LocalDateTime.now().compareTo(event.toDateTime()) < 0) {
                             Toast.makeText(getContext(),
                                     "Please wait until the event is done!",
                                     Toast.LENGTH_SHORT).show();
@@ -152,6 +164,10 @@ public class NewEventItemFragment extends Fragment {
                 });
 
             }
+            else {
+                Button button = view.findViewById(R.id.button);
+                button.setText("Submission blocked");
+            }
         }
 
         else if (user instanceof Admin) {
@@ -160,8 +176,6 @@ public class NewEventItemFragment extends Fragment {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Event event = new Event("BDay", LocalDateTime.now(), "UTSC",
-                    //"Dog run", 100, 100);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("event", event);
                     bundle.putSerializable("user", user);

@@ -22,6 +22,7 @@ import android.widget.Toast;
 import java.time.format.DateTimeParseException;
 
 import com.example.b07finalproject.R;
+import com.example.b07finalproject.mainDBModel;
 import com.example.b07finalproject.ui.postChecker.GradeException;
 import com.example.b07finalproject.ui.postChecker.POStQuestionsFragment;
 
@@ -33,10 +34,11 @@ import java.util.Arrays;
 public class SendRSVPFragment extends Fragment {
 
     private String title;
-    private LocalDateTime time;
+    private String time;
     private String location;
     private String description;
     private int capacity;
+    private mainDBModel dbModel;
 
     public SendRSVPFragment() {
         // Required empty public constructor
@@ -52,8 +54,7 @@ public class SendRSVPFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
+        dbModel = new mainDBModel();
     }
 
     @Override
@@ -97,8 +98,9 @@ public class SendRSVPFragment extends Fragment {
                         DateTimeFormatter formatter = DateTimeFormatter.
                                 ofPattern("MMM dd, yyyy HH:mm");
                         try {
-                            LocalDateTime localDateTime = LocalDateTime.parse(s.toString(), formatter);
-                            time = localDateTime;
+                            LocalDateTime parsedDateTime = LocalDateTime.parse(s.toString(), formatter);
+                            LocalDateTime dateTime = parsedDateTime;
+                            time = s.toString();
                         }
                         catch (DateTimeParseException e){
                             editText.setError("Please type in the right format");
@@ -128,6 +130,20 @@ public class SendRSVPFragment extends Fragment {
                 capacity != 0;
     }
 
+    private boolean validTime() {
+        LocalDateTime now = LocalDateTime.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm");
+        LocalDateTime localDateTime = LocalDateTime.parse(time, formatter);
+
+        // can only post events that is between 5days ago and 1 year later
+        // ideally from now but it will be harder to test feedback
+        if (localDateTime.isAfter(now.minusDays(5)) && localDateTime.isBefore(now.plusYears(1))) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
@@ -149,16 +165,23 @@ public class SendRSVPFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (validValues()) {
+                if (validValues() && validTime()) {
                     Event event = new Event(title, time, location, description, capacity);
+
+                    dbModel.add(event, "events", event.toString());
 
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("event", event);
                     NavHostFragment.findNavController(SendRSVPFragment.this)
                             .navigate(R.id.action_send_rsvp_to_submitted, bundle);
                 }
-                else {
+                else if (! validValues()) {
                     Toast.makeText(requireContext(), "Please fill in all required fields",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+                else {
+                    Toast.makeText(requireContext(), "Event should be held within 1 year",
                             Toast.LENGTH_SHORT).show();
                 }
             }
