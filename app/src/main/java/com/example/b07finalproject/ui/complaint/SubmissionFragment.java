@@ -9,7 +9,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.b07finalproject.R;
 
@@ -64,7 +63,7 @@ public class SubmissionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_submission, container, false);
+        return inflater.inflate(R.layout.fragment_complaint_submission, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {

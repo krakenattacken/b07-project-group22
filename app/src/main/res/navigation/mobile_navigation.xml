@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_nav_complaint_to_nav_submission"
             app:destination="@id/nav_submission" />
+        <action
+            android:id="@+id/action_nav_complaint_to_nav_home"
+            app:destination="@id/nav_home" />
     </fragment>
     <fragment
         android:id = "@+id/nav_submission"
@@ -73,9 +76,13 @@
     <fragment
         android:id = "@+id/nav_complaintlist"
         android:name="com.example.b07finalproject.ui.complaintlist.ComplaintListFragment"
-        android:layout = "@layout/fragment_complaint_list" />
+        android:layout = "@layout/fragment_complaint_list" >
+        <action
+            android:id="@+id/action_nav_complaintlist_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 
-        tools:layout = "@layout/fragment_gallery" />
+
 
     <fragment
         android:id="@+id/nav_login"

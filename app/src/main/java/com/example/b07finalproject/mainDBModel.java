@@ -1,5 +1,7 @@
 package com.example.b07finalproject;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.b07finalproject.ui.login.Student;
@@ -11,6 +13,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class mainDBModel {
     FirebaseDatabase db;
@@ -29,10 +33,27 @@ public class mainDBModel {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("mainDBModel", "Received data from database: " + snapshot.toString());
                 if (!snapshot.exists()){
                     presenter.onDBFail("Path is empty");
                     return;
+                } /*
+
+                for (DataSnapshot shot : snapshot.getChildren()) {
+                    Log.d("mainDBModel", "Snapshot: " + shot.getKey() + " -> " + shot.getValue());
+                } */
+
+                List<Object> itemsList = new ArrayList<>();
+
+                for (DataSnapshot shot : snapshot.getChildren()) {
+                    Object item = shot.getValue(itemClass);
+                    itemsList.add(item);
                 }
+
+                presenter.loadDataFromDB(itemsList);
+
+
+
                 Iterable<DataSnapshot> dbItems = snapshot.getChildren();
                 int counter = 0;
                 for (DataSnapshot i: dbItems) {
@@ -43,7 +64,7 @@ public class mainDBModel {
                 for (DataSnapshot shot: dbItems) {
                     items[counter] = shot.getValue(itemClass);
                 }
-                presenter.loadDataFromDB(items);
+
             }
 
             @Override
