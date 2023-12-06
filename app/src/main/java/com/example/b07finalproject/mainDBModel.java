@@ -56,7 +56,7 @@ public class mainDBModel {
         });
     }
 
-    public void tryToAdd(Object item, String path, String id, DBDependent presenter, mainViewModel viewModel){
+    public void tryToAdd(Object item, String path, String id, DBDependent presenter){
         DatabaseReference ref = db.getReference().child(path);
         ref.addValueEventListener(new ValueEventListener() {
             @Override

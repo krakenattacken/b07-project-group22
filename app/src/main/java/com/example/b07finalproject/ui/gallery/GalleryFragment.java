@@ -35,20 +35,6 @@ public class GalleryFragment extends Fragment {
         return root;
     }
 
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        text = view.findViewById(R.id.text_gallery);
-        GalleryFragment g = this;
-        int x = 0;
-        view.findViewById(R.id.gal_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //viewModel.addToDB(new Student("test", "stuff"), "user_test", "test" + x, g);
-                //viewModel.getAllFromDB("user_test", g, Student.class);
-            }
-        });
-    }
-
-
     public void loadDataFromDB(ArrayList<Object> items){
         //Student[] cItems = new Student[items.length];
         //for (int i = 0; i< items.length; i++){

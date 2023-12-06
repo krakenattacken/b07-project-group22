@@ -1,6 +1,11 @@
 package com.example.b07finalproject.ui.login;
 
+import java.util.ArrayList;
+import com.example.b07finalproject.ui.events.Event;
+
 public class Student extends User{
+
+    ArrayList<Event> eventsToAttend;
     public Student(){
         super();
     }

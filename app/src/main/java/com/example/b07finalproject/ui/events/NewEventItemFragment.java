@@ -1,12 +1,20 @@
 package com.example.b07finalproject.ui.events;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
 import com.example.b07finalproject.R;
 import com.example.b07finalproject.mainDBModel;
 import com.example.b07finalproject.ui.login.Admin;
@@ -15,6 +23,8 @@ import com.example.b07finalproject.ui.login.User;
 
 
 import com.example.b07finalproject.R;
+
+import java.time.LocalDateTime;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,8 +55,6 @@ public class NewEventItemFragment extends Fragment {
     public static NewEventItemFragment newInstance(String param1, String param2) {
         NewEventItemFragment fragment = new NewEventItemFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }

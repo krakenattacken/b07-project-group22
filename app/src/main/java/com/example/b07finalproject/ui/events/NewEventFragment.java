@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -34,6 +35,8 @@ import com.example.b07finalproject.ui.viewmodel.CategoryViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class NewEventFragment extends Fragment implements OnItemClickListener, DBDependent {
@@ -42,6 +45,7 @@ public class NewEventFragment extends Fragment implements OnItemClickListener, D
     private List<Event> eventList;
     private mainDBModel dbModel;
     private mainViewModel viewModel;
+    User user;
 
     public static NewEventFragment newInstance() {
         return new NewEventFragment();

@@ -71,6 +71,8 @@
     <string name="give_feedback">Give us some feedbacks about the event!</string>
     <string name="give_comment">What was good/bad about the event?</string>
     <string name="give_rating">Rate the event from 1 - 5</string>
+    <string name="complaint_disclaimer">Complaints cannot be changed once you submit them.</string>
+
 
     <string-array name="rating_array">
         <item>1</item>

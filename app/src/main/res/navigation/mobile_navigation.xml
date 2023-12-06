@@ -126,6 +126,9 @@
         <action
             android:id="@+id/action_newevents_to_eventitem"
             app:destination="@+id/new_event_item"/>
+        <action
+            android:id="@+id/action_newevents_to_send_rsvp"
+            app:destination="@+id/send_rsvp"/>
     </fragment>
 
     <fragment
