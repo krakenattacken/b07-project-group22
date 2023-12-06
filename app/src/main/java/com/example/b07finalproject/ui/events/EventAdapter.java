@@ -1,4 +1,4 @@
-package com.example.b07finalproject.ui.announcements;
+package com.example.b07finalproject.ui.events;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,25 +13,23 @@ import com.example.b07finalproject.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapter.ViewHolder> {
+public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
     private final OnItemClickListener onItemClickListener;
-    private List<Announcement> announcements;
+    private List<Event> events;
 
-    PostAnnounFragment postAnnounFragment;
-
-    public AnnouncementAdapter(List<Announcement> announcements, OnItemClickListener onItemClickListener) {
-        this.announcements = new ArrayList<>();
+    public EventAdapter(OnItemClickListener onItemClickListener) {
+        this.events = new ArrayList<>();
         this.onItemClickListener = onItemClickListener;
     }
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView announName;
-        public TextView announTime;
-        public TextView announLocation;
+        public TextView eventName;
+        public TextView eventTime;
+        public TextView eventLocation;
         public ViewHolder(View itemView, OnItemClickListener onItemClickListener) {
             super(itemView);
-            announLocation = (TextView) itemView.findViewById(R.id.announ_location);
-            announTime = (TextView) itemView.findViewById(R.id.announ_time);
-            announName= (TextView) itemView.findViewById(R.id.announ_name);
+            eventLocation = (TextView) itemView.findViewById(R.id.event_location);
+            eventTime = (TextView) itemView.findViewById(R.id.event_time);
+            eventName= (TextView) itemView.findViewById(R.id.event_name);
 
             //for click behaviour of list items
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -47,9 +45,9 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
             });
         }
     }
-    public void setAnnouncements(List<Announcement> announcements){
+    public void setEvents(List<Event> events){
         // will probably be changed
-        this.announcements = announcements;
+        this.events = events;
         notifyDataSetChanged();
     }
 
@@ -59,29 +57,23 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View announView = inflater.inflate(R.layout.announ_view_item, parent, false);
+        View eventView = inflater.inflate(R.layout.event_view_item, parent, false);
 
-        return new ViewHolder(announView, onItemClickListener);
+        return new ViewHolder(eventView, onItemClickListener);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Announcement announ = announcements.get(position);
-        holder.announLocation.setText(announ.getLocation());
-        holder.announName.setText(announ.getName());
-        holder.announTime.setText(announ.getTime());
+        Event event = events.get(position);
+        holder.eventLocation.setText(event.getLocation());
+        holder.eventName.setText(event.getName());
+        holder.eventTime.setText(event.getTime());
     }
 
     @Override
     public int getItemCount() {
-        return announcements.size();
+        return events.size();
     }
 
 
 }
-
-
-
-
-
-

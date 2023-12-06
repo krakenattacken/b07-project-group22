@@ -13,7 +13,7 @@ import java.util.List;
 //ADD Notification functions here for both events and announcements
 public class Occasion {
     private String name;
-    private LocalDateTime dateTime;
+    private String time;
     private String location;
     private String description;
 
@@ -22,9 +22,9 @@ public class Occasion {
     public Occasion() {
     }
 
-    public Occasion(String name, LocalDateTime dateTime, String location, String description) {
+    public Occasion(String name, String time, String location, String description) {
         this.name = name;
-        this.dateTime = dateTime;
+        this.time = time;
         this.location = location;
         this.description = description;
     }
@@ -32,10 +32,9 @@ public class Occasion {
     public String getName() {
         return name;
     }
-
+    
     public String getTime() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm");
-        return dateTime.format(formatter);
+        return time;
     }
 
     public String getLocation() {
@@ -43,6 +42,18 @@ public class Occasion {
     }
 
     public String getDescription() { return description; }
+
+    public LocalDateTime toDateTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm");
+        LocalDateTime localDateTime = LocalDateTime.parse(time, formatter);
+
+        return localDateTime;
+    }
+
+    public static String toTime(LocalDateTime localDateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm");
+        return localDateTime.format(formatter);
+    }
 
     @Override   //equals method should be added and modified in Announcements and Events
     public boolean equals(Object obj) {
@@ -55,7 +66,7 @@ public class Occasion {
 
         Occasion other = (Occasion) obj;
 
-        return (other.name == this.name && other.dateTime == this.dateTime && other.location == this.location && other.description == this.description);
+        return (other.name == this.name && other.time == this.time && other.location == this.location && other.description == this.description);
     }
 
 

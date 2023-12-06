@@ -4,32 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-/*
-
-public class AnnouncementsViewModel extends ViewModel {
-
-    private final MutableLiveData<String> mText;
-
-    public AnnouncementsViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is where students and admins can view announcements,\nonly admins will be able to see the button to post a new announcement");
-    }
-
-    public LiveData<String> getText() {
-        return mText;
-    }
-}
-
- */
-
-
-
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AnnouncementsViewModel extends ViewModel {
