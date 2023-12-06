@@ -9,8 +9,6 @@ import android.widget.Toast;
 
 import com.example.b07finalproject.ui.login.Admin;
 import com.example.b07finalproject.ui.login.User;
-import android.view.View;
-import android.view.Menu;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -18,7 +16,6 @@ import android.widget.Spinner;
 import com.example.b07finalproject.R;
 import com.example.b07finalproject.ui.viewmodel.CategoryViewModel;
 import com.example.b07finalproject.ui.viewmodel.SatisfactionViewModel;
-
 import com.example.b07finalproject.ui.viewmodel.SatisfactionViewModel;
 
 import com.example.b07finalproject.ui.complaint.ComplaintFragment;
@@ -46,7 +43,10 @@ public class MainActivity extends AppCompatActivity {
     private mainViewModel viewModel;
     // added viewModels
     private CategoryViewModel categoryViewModel;
+    private SatisfactionViewModel satisfactionViewModel;
 
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -84,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(mainViewModel.class);
         // create viewModel
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
+        satisfactionViewModel = new ViewModelProvider(this).get(SatisfactionViewModel.class);
+
     }
 
     @Override

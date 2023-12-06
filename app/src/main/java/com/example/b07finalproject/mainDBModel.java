@@ -2,7 +2,6 @@ package com.example.b07finalproject;
 
 import androidx.annotation.NonNull;
 
-import com.example.b07finalproject.ui.login.Student;
 import com.example.b07finalproject.ui.login.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -11,6 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class mainDBModel {
     FirebaseDatabase db;
@@ -26,24 +26,22 @@ public class mainDBModel {
 
     public void getAllFromDB(String path, DBDependent presenter, Class itemClass){
         DatabaseReference ref = db.getReference().child(path);
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.exists()){
                     presenter.onDBFail("Path is empty");
                     return;
                 }
-                Iterable<DataSnapshot> dbItems = snapshot.getChildren();
-                int counter = 0;
-                for (DataSnapshot i: dbItems) {
-                    counter++;
+                List<Object> itemsList = new ArrayList<>();
+
+
+                for (DataSnapshot shot : snapshot.getChildren()) {
+                    Object item = shot.getValue(itemClass);
+                    itemsList.add(item);
                 }
-                Object[] items = new Object[counter];
-                counter = 0;
-                for (DataSnapshot shot: dbItems) {
-                    items[counter] = shot.getValue(itemClass);
-                }
-                presenter.loadDataFromDB(items);
+
+                presenter.loadDataFromDB(itemsList);
             }
 
             @Override

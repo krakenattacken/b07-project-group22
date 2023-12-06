@@ -5,6 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey"
     tools:context=".ui.postChecker.POStChecker">
 
     <!-- TODO: Update blank fragment layout -->
@@ -13,10 +14,11 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="monospace"
         android:gravity="center_horizontal"
         android:paddingTop="@dimen/post_title_adjust"
         android:text="@string/post_title"
-        android:textSize="@dimen/title_size"
+        android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,6 +27,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="monospace"
         android:gravity="center_horizontal"
         android:text="@string/post_question"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,7 +51,9 @@
         android:id="@+id/button_to_questions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="monospace"
         android:text="@string/next"
+        android:textColor="#F1ECEC"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
