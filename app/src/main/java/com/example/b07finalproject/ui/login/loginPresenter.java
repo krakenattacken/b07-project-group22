@@ -51,14 +51,6 @@ public class loginPresenter {
     }
 
     public void login(User user){
-        Toast.makeText(view.getContext(), view.getResources().getString(R.string.welcome_user)
-                        + " " + user + "!", Toast.LENGTH_SHORT).show();
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("user", user);
-
-        NavHostFragment.findNavController(view).navigate(R.id.nav_home, bundle);
-        viewModel = new ViewModelProvider(view.getActivity()).get(mainViewModel.class);
         view.displayLogin(user);
     }
 }

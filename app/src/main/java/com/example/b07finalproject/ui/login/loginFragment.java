@@ -74,7 +74,9 @@ public class loginFragment extends Fragment {
     public void displayLogin(User user){
         Toast.makeText(getContext(), getResources().getString(R.string.welcome_user)
                 + " " + user + "!", Toast.LENGTH_SHORT).show();
-        NavHostFragment.findNavController(this).navigate(R.id.nav_home);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("user", user);
+        NavHostFragment.findNavController(this).navigate(R.id.nav_home, bundle);
         viewModel.currentUser = user;
     }
 }
