@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.b07finalproject.ui.login.Student;
 import com.example.b07finalproject.ui.login.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -13,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class mainDBModel {
@@ -29,7 +31,7 @@ public class mainDBModel {
 
     public void getAllFromDB(String path, DBDependent presenter, Class itemClass){
         DatabaseReference ref = db.getReference().child(path);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.exists()){
@@ -54,9 +56,9 @@ public class mainDBModel {
         });
     }
 
-    public void tryToAdd(Object item, String path, String id, DBDependent presenter){
+    public void tryToAdd(Object item, String path, String id, DBDependent presenter, mainViewModel viewModel){
         DatabaseReference ref = db.getReference().child(path);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(id).exists()){

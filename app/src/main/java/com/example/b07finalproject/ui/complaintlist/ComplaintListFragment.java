@@ -8,59 +8,82 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.b07finalproject.DBDependent;
 import com.example.b07finalproject.R;
+import com.example.b07finalproject.mainDBModel;
 import com.example.b07finalproject.ui.complaint.Complaint;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class ComplaintListFragment extends Fragment {
+public class ComplaintListFragment extends Fragment implements DBDependent {
 
+    private mainDBModel DBModel;
+    private ComplaintAdapter adapter;
+    private List<Complaint> complaintList;
+    ListView listView;
 
-
-    public ComplaintListFragment() {
-        // Required empty public constructor
+    public static ComplaintListFragment newInstance() {
+        return new ComplaintListFragment();
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-
-
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_complaint_list, container, false);
     }
 
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ListView ComplaintListView = (ListView) view.findViewById(R.id.listview);
-        List<Complaint> complaintList = getComplaints();
 
-        ComplaintAdapter adapter = new ComplaintAdapter(requireContext(), R.layout.fragment_item_complaint_list, complaintList);
-        ComplaintListView.setAdapter(adapter);
+        DBModel = new mainDBModel();
+        complaintList = new ArrayList<>();
+        listView = view.findViewById(R.id.listview);
 
-        /* Set item click listener if needed
-        ComplaintListView.setOnItemClickListener((parent, view1, position, id) -> {
-            // Handle item click
-            String selectedComplaint = (String) parent.getItemAtPosition(position);
-            Snackbar.make(view, "Selected Complaint: " + selectedComplaint, Snackbar.LENGTH_SHORT).show();
-        }); */
+
+        // Fetch data from the database
+        DBModel.getAllFromDB("complaints", this, Complaint.class);
+
+        view.findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(ComplaintListFragment.this)
+                        .navigate(R.id.action_nav_complaintlist_to_nav_home);
+            }
+        });
     }
 
-    private List<Complaint> getComplaints(){
-        List<Complaint> complaints = new ArrayList<>();
-        complaints.add(new Complaint("Heading 1", "Body 1"));
-        complaints.add(new Complaint("Heading 2", "Body 2"));
-        complaints.add(new Complaint("Heading 3", "Body 3"));
-        return complaints;
+    @Override
+    public void loadDataFromDB(List<Object> items) {
+        complaintList.clear();
+
+        for (Object item : items) {
+            if (item instanceof Complaint) {
+                complaintList.add((Complaint) item);
+            }
+        }
+        adapter = new ComplaintAdapter(getContext(), R.layout.fragment_item_complaint_list, complaintList);
+        listView.setAdapter(adapter);
+
+    }
+
+    @Override
+    public void onDBFail(String reason) {
+        // Handle database failure
     }
 
 
-    }
+}
+
+
+
+
 
 
 
