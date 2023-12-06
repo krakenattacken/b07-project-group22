@@ -20,11 +20,13 @@ public class Announcement extends Occasion implements Serializable {
     //methods to be added as needed
 
     //hashcode of username and title (for unique ID)
-    
+
+
 
     //to do when firebase db gets made (for now, just a tester)
     public static List<Announcement> createAnnouncementList(int numAnnoun) {
         List<Announcement> announcements = new ArrayList<Announcement>();
+
         return announcements;
     }
 

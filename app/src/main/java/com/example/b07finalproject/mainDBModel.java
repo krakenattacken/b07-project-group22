@@ -31,7 +31,7 @@ public class mainDBModel {
 
     public void getAllFromDB(String path, DBDependent presenter, Class itemClass){
         DatabaseReference ref = db.getReference().child(path);
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.exists()){
