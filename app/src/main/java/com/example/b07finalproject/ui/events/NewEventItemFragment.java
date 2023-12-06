@@ -5,7 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
 import androidx.fragment.app.Fragment;
+import com.example.b07finalproject.R;
+import com.example.b07finalproject.mainDBModel;
+import com.example.b07finalproject.ui.login.Admin;
+import com.example.b07finalproject.ui.login.Student;
+import com.example.b07finalproject.ui.login.User;
+
 
 import com.example.b07finalproject.R;
 
@@ -16,14 +23,11 @@ import com.example.b07finalproject.R;
  */
 public class NewEventItemFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Event event;
+    private User user;
+    private boolean attendEvent;
+    private mainDBModel dbModel;
 
     public NewEventItemFragment() {
         // Required empty public constructor
@@ -50,10 +54,8 @@ public class NewEventItemFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        dbModel = new mainDBModel();
+
     }
 
     @Override
@@ -61,5 +63,131 @@ public class NewEventItemFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_event_item, container, false);
+    }
+  
+    private TextView newTextView(View view, int textViewID) {
+        TextView textView = view.findViewById(textViewID);
+
+        return textView;
+    }
+
+    private void updateLayout() {
+        TextView eventName = newTextView(getView(), R.id.item_event_title);
+        TextView eventDescription = newTextView(getView(), R.id.item_event_description);
+        TextView eventTime = newTextView(getView(), R.id.event_time_tv);
+        TextView eventLocation = newTextView(getView(), R.id.event_location_tv);
+
+        eventName.setText(event.getName());
+        eventDescription.setText(event.getDescription());
+        eventTime.setText(event.getTime());
+        eventLocation.setText(event.getLocation());
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            event = (Event) bundle.getSerializable("clicked_event");
+            user = (User) bundle.getSerializable("user");
+        }
+
+        updateLayout();
+
+        if (user instanceof Student) {
+            Student student = (Student) user;
+            LocalDateTime now = LocalDateTime.now();
+            // ideally only show checkbox if event is after now but
+            // if now is within 5 days after event then you can still receive RSVP
+            if (! event.participating(student) &&
+                    event.toDateTime().isAfter(now.minusDays(5))) {
+                TextView rsvp = newTextView(getView(), R.id.student_rsvp);
+                rsvp.setText("Are you interested in the event?");
+                CheckBox rsvpCheck = view.findViewById(R.id.rsvp_response);
+                rsvpCheck.setVisibility(View.VISIBLE);
+
+                rsvpCheck.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    if (isChecked) {
+                        attendEvent = true;
+                    }
+                    else {
+                        attendEvent = false;
+                    }
+                });
+
+                Button button = view.findViewById(R.id.button);
+                button.setText("Submit RSVP");
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (attendEvent) {
+                            //((Student) user).acceptRSVP(event);
+                            if (event.hasSpace()) {
+                                event.attendeesIncreased(student);
+                                dbModel.add(event, "events", event.toString());
+                            }
+                            else {
+                                Toast.makeText(getContext(), "Sorry we are full...",
+                                        Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        }
+
+                        Bundle bundle = new Bundle();
+                        bundle.putBoolean("status", attendEvent);
+                        NavHostFragment.findNavController(NewEventItemFragment.this)
+                                .navigate(R.id.action_eventitem_to_rsvp_received, bundle);
+                    }
+                });
+            }
+            else if (event.participating(student)){
+                //Add button
+                Button button = view.findViewById(R.id.button);
+                button.setText("Send Feedback");
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        if (LocalDateTime.now().compareTo(event.toDateTime()) < 0) {
+                            Toast.makeText(getContext(),
+                                    "Please wait until the event is done!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("event", event);
+                            bundle.putSerializable("user", user);
+
+                            NavHostFragment.findNavController(NewEventItemFragment.this)
+                                    .navigate(R.id.action_eventitem_to_feedback, bundle);
+                        }
+
+                    }
+                });
+
+            }
+            else {
+                Button button = view.findViewById(R.id.button);
+                button.setText("Submission blocked");
+            }
+        }
+
+        else if (user instanceof Admin) {
+            Button button = view.findViewById(R.id.button);
+            button.setText("View Feedback");
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("event", event);
+                    bundle.putSerializable("user", user);
+
+                    NavHostFragment.findNavController(NewEventItemFragment.this)
+                            .navigate(R.id.action_eventitem_to_admin_feedback, bundle);
+                }
+            });
+        }
+
     }
 }

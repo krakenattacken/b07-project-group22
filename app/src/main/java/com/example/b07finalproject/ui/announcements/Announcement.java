@@ -24,7 +24,7 @@ public class Announcement extends Occasion implements Serializable {
 
 
     //to do when firebase db gets made (for now, just a tester)
-    public static List<Announcement> createAnnouncementList(int numAnnoun) {
+    public static List<Announcement> createAnnouncementList() {
         List<Announcement> announcements = new ArrayList<Announcement>();
         /*
         LocalDateTime now = null;
@@ -32,7 +32,9 @@ public class Announcement extends Occasion implements Serializable {
             now = LocalDateTime.now();
         }
         Announcement announ1 = new Announcement("Announ 1", "manually entered time", "Location 1", "Description 1");
+
         announcements.add(announ1);
+
         Announcement announ2 = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             announ2 = new Announcement("Announ 2", "manually entered time", "Location 2", "Description 2");
@@ -43,6 +45,7 @@ public class Announcement extends Occasion implements Serializable {
             announ4 = new Announcement("Announ 2", "manually entered time", "Location 2", "Description 2");
         }
         Announcement announ5 = new Announcement("Announ 1", "manually entered time", "Location 1", "Description 1");
+        announcements.add(announ1);
 
         announcements.add(announ2);
         announcements.add(announ3);

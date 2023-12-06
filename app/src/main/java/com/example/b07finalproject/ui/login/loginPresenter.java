@@ -1,8 +1,10 @@
 package com.example.b07finalproject.ui.login;
 
+import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.b07finalproject.R;
@@ -11,7 +13,6 @@ import com.example.b07finalproject.mainViewModel;
 public class loginPresenter {
     loginModel model;
     loginFragment view;
-    private mainViewModel viewModel;
 
     public loginPresenter(loginModel model, loginFragment view){
         this.model = model;
@@ -43,17 +44,13 @@ public class loginPresenter {
         }
     }
     public void setUsernameError(int messageID){
-        view.usernameInput.setError(view.getResources().getString(messageID));
+        view.setUsernameError(messageID);
     }
     public void setPasswordError(int messageID){
-        view.passwordInput.setError(view.getResources().getString(messageID));
+        view.setPasswordError(messageID);
     }
 
     public void login(User user){
-        Toast.makeText(view.getContext(), view.getResources().getString(R.string.welcome_user)
-                        + " " + user + "!", Toast.LENGTH_SHORT).show();
-        NavHostFragment.findNavController(view).navigate(R.id.nav_home);
-        viewModel = new ViewModelProvider(view.getActivity()).get(mainViewModel.class);
-        viewModel.currentUser = user;
+        view.displayLogin(user);
     }
 }

@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.TextView;
+
 
 import androidx.fragment.app.Fragment;
 
@@ -24,9 +26,11 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 public class AnnouncementItemFragment extends Fragment {
 
+
     private Announcement announcement;
     private User user;
     private mainDBModel dbModel;
+
     public AnnouncementItemFragment() {
         // Required empty public constructor
     }
@@ -41,7 +45,9 @@ public class AnnouncementItemFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         dbModel = new mainDBModel();
+
     }
 
     @Override

@@ -30,5 +30,8 @@ public class EventFeedback {
     public EventFeedback submitFeedback(EventFeedback eventFeedback) {
         return eventFeedback;
     }
-
+    @Override
+    public String toString() {
+        return event.toString() + "," + comment + "," + String.valueOf(rating);
+    }
 }

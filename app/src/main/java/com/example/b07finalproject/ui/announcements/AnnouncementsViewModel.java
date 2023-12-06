@@ -17,7 +17,7 @@ public class AnnouncementsViewModel extends ViewModel {
     public LiveData<List<Announcement>> getItemList() {
         if (announList == null) {
             announList = new MutableLiveData<>();
-            x = e.createAnnouncementList(1);
+            x = e.createAnnouncementList();
             announList.setValue(x);
         }
         return announList;

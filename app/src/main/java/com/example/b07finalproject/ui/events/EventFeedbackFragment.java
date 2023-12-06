@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.b07finalproject.R;
+import com.example.b07finalproject.mainDBModel;
 import com.example.b07finalproject.ui.login.User;
 import com.example.b07finalproject.ui.postChecker.GradeException;
 import com.example.b07finalproject.ui.postChecker.POStQuestionsFragment;
@@ -30,17 +31,13 @@ import com.example.b07finalproject.ui.viewmodel.CategoryViewModel;
 
 import java.util.Arrays;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EventFeedbackFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class EventFeedbackFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     private Event event;
     private User user;
     private String comment;
     private int rating;
+    private mainDBModel dbModel;
 
     public EventFeedbackFragment() {
         // Required empty public constructor
@@ -56,8 +53,7 @@ public class EventFeedbackFragment extends Fragment implements AdapterView.OnIte
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
+        dbModel = new mainDBModel();
     }
 
     @Override
@@ -121,8 +117,9 @@ public class EventFeedbackFragment extends Fragment implements AdapterView.OnIte
             public void onClick(View view) {
                 // create feedback
                 EventFeedback eventFeedback = new EventFeedback(event, comment, rating);
-                Toast.makeText(getContext(), event.getName() + "\n" + comment + "\n" + rating,
-                        Toast.LENGTH_SHORT).show();
+                dbModel.add(eventFeedback, "eventFeedbacks", eventFeedback.toString());
+                NavHostFragment.findNavController(EventFeedbackFragment.this)
+                        .navigate(R.id.action_to_feedback_submitted);
             }
         });
     }

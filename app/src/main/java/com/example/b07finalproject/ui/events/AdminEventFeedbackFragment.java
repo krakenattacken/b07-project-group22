@@ -5,6 +5,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,7 +20,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.b07finalproject.DBDependent;
 import com.example.b07finalproject.R;
+import com.example.b07finalproject.mainDBModel;
 import com.example.b07finalproject.ui.DBInterface;
 
 import org.checkerframework.checker.units.qual.A;
@@ -25,7 +30,10 @@ import org.w3c.dom.Text;
 
 import java.time.LocalDateTime;
 
+import com.example.b07finalproject.ui.login.Admin;
+import com.example.b07finalproject.ui.login.Student;
 import com.example.b07finalproject.ui.login.User;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,22 +42,21 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.EventListener;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link AdminEventFeedbackFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AdminEventFeedbackFragment extends Fragment {
+public class AdminEventFeedbackFragment extends Fragment implements DBDependent {
 
-    FirebaseDatabase db;
     private Event event;
     private User user;
     ArrayList<EventFeedback> feedbacksList;
+    private mainDBModel dbModel;
 
     public AdminEventFeedbackFragment() {
-        // Required empty public constructor
-        //db = FirebaseDatabase.getInstance("https://bo7app-default-rtdb.firebaseio.com/");
         feedbacksList = new ArrayList<EventFeedback>();
     }
 
@@ -63,8 +70,7 @@ public class AdminEventFeedbackFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
+        dbModel = new mainDBModel();
     }
 
     @Override
@@ -90,25 +96,7 @@ public class AdminEventFeedbackFragment extends Fragment {
             user = (User) bundle.getSerializable("user");
         }
 
-        //Toast.makeText(getContext(), "hello", Toast.LENGTH_SHORT).show();
-        //event = new Event("BDay", LocalDateTime.now(), "UTSC",
-                //"Dog run", 100, 100);
-
-        //Event event1 = new Event("BDay", LocalDateTime.now(), "UTSC",
-                //"Dog run", 100, 100);
-        //EventFeedback feedback1 = new EventFeedback(event1, "It was fun", 3);
-        //Event event2 = new Event("BDay", LocalDateTime.now(), "UTSC",
-                //"Dog run", 100, 100);
-        //EventFeedback feedback2 = new EventFeedback(event2, "It was boring", 1);
-        //Event event3 = new Event("BDay", LocalDateTime.now(), "UTSC",
-                //"Dog run", 100, 100);
-        //EventFeedback feedback3 = new EventFeedback(event3, "It was okay", 5);
-        //Event event4 = new Event("Gym", LocalDateTime.now(), "UTSC",
-                //"Dog run", 100, 100);
-        //EventFeedback feedback4 = new EventFeedback(event4, "It was amazing", 5);
-
-        updateLayout();
-
+        dbModel.getAllFromDB("eventFeedbacks", this, EventFeedback.class);
     }
 
     private void updateLayout() {
@@ -144,5 +132,28 @@ public class AdminEventFeedbackFragment extends Fragment {
         TextView eventCounts = newTextView(getView(), R.id.eventCounts);
         int countFeedbacks = stats.getCount(event);
         eventCounts.setText(String.valueOf(countFeedbacks));
+    }
+
+    @Override
+    public void loadDataFromDB(List<Object> items) {
+
+        if (items.size() == 0) {
+            Toast.makeText(getContext(), "none", Toast.LENGTH_SHORT).show();
+        }
+
+        for (int i = 0; i < items.size(); i++) {
+            EventFeedback feedback = (EventFeedback) items.get(i);
+            if (feedback != null) {
+                feedbacksList.add(feedback);
+                Toast.makeText(getContext(), "found", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        updateLayout();
+    }
+
+    @Override
+    public void onDBFail(String reason) {
+
     }
 }

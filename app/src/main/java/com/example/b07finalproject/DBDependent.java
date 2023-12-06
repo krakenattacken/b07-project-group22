@@ -1,5 +1,6 @@
 package com.example.b07finalproject;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +12,7 @@ public interface DBDependent {
     You should probably cast items into whatever class you're working with
     This method should update the UI using items
      */
-    public abstract void loadDataFromDB(List<Object>  items);
-
-    void loadDataFromDB(ArrayList<Object> items);
-
+    public abstract void loadDataFromDB(List<Object> items);
     /*
         this function is called if there's an error with the database reason can be:
         - "Something went wrong" if the database just fails to read (I don't know how that happens, but just in case)

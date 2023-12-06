@@ -32,7 +32,7 @@ public class Occasion {
     public String getName() {
         return name;
     }
-    
+
     public String getTime() {
         return time;
     }
@@ -66,10 +66,15 @@ public class Occasion {
 
         Occasion other = (Occasion) obj;
 
-        return (other.name == this.name && other.time == this.time && other.location == this.location && other.description == this.description);
+        return (this.toString().equals(other.toString()));
     }
 
-
+    @Override
+    public String toString() {
+        String newFormat = this.getName() + "," + this.getTime() + "," + this.getLocation()
+                + "," + this.getDescription();
+        return newFormat;
+    }
 
 
 

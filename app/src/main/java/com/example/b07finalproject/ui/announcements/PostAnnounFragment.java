@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -20,12 +20,17 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
 
 import com.example.b07finalproject.DBDependent;
 import com.example.b07finalproject.R;
 import com.example.b07finalproject.databinding.FragmentPostAnnounBinding;
 import com.example.b07finalproject.mainDBModel;
 import com.example.b07finalproject.mainViewModel;
+
 import com.example.b07finalproject.ui.events.EventAdapter;
 import com.example.b07finalproject.ui.events.NewEventViewModel;
 import com.example.b07finalproject.ui.login.User;
@@ -34,18 +39,22 @@ import com.example.b07finalproject.ui.login.User;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class PostAnnounFragment extends Fragment {
 
+public class PostAnnounFragment extends Fragment implements DBDependent {
+
+    Announcement announcementObj;
 
     AnnouncementAdapter announcementAdapter;
 
     AnnouncementsFragment announcementsFragment = new AnnouncementsFragment();
 
     //List<Announcement> announcements = new ArrayList<Announcement>();
+
     private mainDBModel dbModel;
 
     String title;
@@ -64,6 +73,7 @@ public class PostAnnounFragment extends Fragment {
     private FragmentPostAnnounBinding binding;
 
     private mainViewModel viewModel;
+
 
     public PostAnnounFragment(){
     }
@@ -167,6 +177,13 @@ public class PostAnnounFragment extends Fragment {
         description = null;
     }
 
+    public List<Announcement> getAnnouncements(){
+        if (announcements != null){
+            return announcements;
+        }
+        return null;
+    }
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -181,8 +198,8 @@ public class PostAnnounFragment extends Fragment {
         descriptionInput = (EditText)descriptionV.findViewById(R.id.descriptionInput);
         timeInput = (EditText)timeV.findViewById(R.id.timeInput);
 
-         */
 
+         */
         //AnnouncementAdapter.ViewHolder announViewHolder = announcementAdapter.new ViewHolder(view);
 
         //Post Button in fragment_post_announ_xml should send notifications to observers (students) and take admin back to AnnouncementsFragment page
@@ -226,16 +243,32 @@ public class PostAnnounFragment extends Fragment {
 
                 //These inputs should be in the database
                 /*
+
+        PostAnnounFragment thisFragment = this;
+        binding.postButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //These inputs should be in the database
                 title = titleInput.getText().toString();
                 time = timeInput.getText().toString();
                 location = locationInput.getText().toString();
                 description = descriptionInput.getText().toString();
+
 
                 announcementObj = new Announcement(title, time, location, description);
 
                 dbModel.add(announcementObj, "announcement", title+location);
 
 
+
+
+
+
+                announcementObj = new Announcement(title, time, location, description);
+
+
+                dbModel.add(announcementObj, "announcement", title+location);
 
                 NavHostFragment.findNavController(PostAnnounFragment.this)
                         .navigate(R.id.action_nav_postannoun_to_nav_announcements);
@@ -245,7 +278,9 @@ public class PostAnnounFragment extends Fragment {
         });
 
 
+
         //announcements.add(announcementObj);
+
         //announcementAdapter = new AnnouncementAdapter(announcements, announcementsFragment);
         //announcementAdapter.setAnnouncements(announcements);
         //announcementAdapter.onBindViewHolder(announViewHolder, 0);
@@ -258,5 +293,15 @@ public class PostAnnounFragment extends Fragment {
         binding = null;
     }
 
+    @Override
+    public void loadDataFromDB(List<Object> items) {
+
+    }
+
+    @Override
+    public void onDBFail(String reason) {
+
+    }
+}
 
 }
