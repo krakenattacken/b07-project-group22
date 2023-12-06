@@ -45,16 +45,14 @@ import java.util.List;
 
 
 
-public class PostAnnounFragment extends Fragment implements DBDependent {
+public class PostAnnounFragment extends Fragment {
 
-    Announcement announcementObj;
 
     AnnouncementAdapter announcementAdapter;
 
     AnnouncementsFragment announcementsFragment = new AnnouncementsFragment();
 
     //List<Announcement> announcements = new ArrayList<Announcement>();
-
     private mainDBModel dbModel;
 
     String title;
@@ -73,7 +71,6 @@ public class PostAnnounFragment extends Fragment implements DBDependent {
     private FragmentPostAnnounBinding binding;
 
     private mainViewModel viewModel;
-
 
     public PostAnnounFragment(){
     }
@@ -177,29 +174,9 @@ public class PostAnnounFragment extends Fragment implements DBDependent {
         description = null;
     }
 
-    public List<Announcement> getAnnouncements(){
-        if (announcements != null){
-            return announcements;
-        }
-        return null;
-    }
-
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /*
-        View titleV = requireActivity().findViewById(R.id.titleInput);
-        View locationV = requireActivity().findViewById(R.id.locationInput);
-        View descriptionV = requireActivity().findViewById(R.id.descriptionInput);
-        View timeV = requireActivity().findViewById(R.id.timeInput);
-
-        titleInput = (EditText)titleV.findViewById(R.id.titleInput);
-        locationInput = (EditText)locationV.findViewById(R.id.locationInput);
-        descriptionInput = (EditText)descriptionV.findViewById(R.id.descriptionInput);
-        timeInput = (EditText)timeV.findViewById(R.id.timeInput);
-
-
-         */
         //AnnouncementAdapter.ViewHolder announViewHolder = announcementAdapter.new ViewHolder(view);
 
         //Post Button in fragment_post_announ_xml should send notifications to observers (students) and take admin back to AnnouncementsFragment page
@@ -238,52 +215,9 @@ public class PostAnnounFragment extends Fragment implements DBDependent {
                     Toast.makeText(requireContext(), "Occasion should be within 1 year",
                             Toast.LENGTH_SHORT).show();
                 }
-
-
-
-                //These inputs should be in the database
-                /*
-
-        PostAnnounFragment thisFragment = this;
-        binding.postButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //These inputs should be in the database
-                title = titleInput.getText().toString();
-                time = timeInput.getText().toString();
-                location = locationInput.getText().toString();
-                description = descriptionInput.getText().toString();
-
-
-                announcementObj = new Announcement(title, time, location, description);
-
-                dbModel.add(announcementObj, "announcement", title+location);
-
-
-
-
-
-
-                announcementObj = new Announcement(title, time, location, description);
-
-
-                dbModel.add(announcementObj, "announcement", title+location);
-
-                NavHostFragment.findNavController(PostAnnounFragment.this)
-                        .navigate(R.id.action_nav_postannoun_to_nav_announcements);
-
-                 */
+                
             }
         });
-
-
-
-        //announcements.add(announcementObj);
-
-        //announcementAdapter = new AnnouncementAdapter(announcements, announcementsFragment);
-        //announcementAdapter.setAnnouncements(announcements);
-        //announcementAdapter.onBindViewHolder(announViewHolder, 0);
 
     }
 
@@ -292,16 +226,4 @@ public class PostAnnounFragment extends Fragment implements DBDependent {
         super.onDestroyView();
         binding = null;
     }
-
-    @Override
-    public void loadDataFromDB(List<Object> items) {
-
-    }
-
-    @Override
-    public void onDBFail(String reason) {
-
-    }
-}
-
 }
