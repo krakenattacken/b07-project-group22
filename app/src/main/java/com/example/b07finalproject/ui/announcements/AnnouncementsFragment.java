@@ -29,20 +29,15 @@ import java.util.List;
 
 public class AnnouncementsFragment extends Fragment implements OnItemClickListener, DBDependent {
 
+
     //private AnnouncementsViewModel mViewModel;
     private List<Announcement> announList;
-
 
     //PostAnnounFragment postAnnounFragment;
 
     User user;
     private mainViewModel viewModel;
     private mainDBModel dbModel;
-
-    PostAnnounFragment postAnnounFragment;
-
-    public User user;
-    private mainViewModel viewModel;
 
     public static AnnouncementsFragment newInstance() {
         return new AnnouncementsFragment();
@@ -86,23 +81,15 @@ public class AnnouncementsFragment extends Fragment implements OnItemClickListen
 
         //add this
         announList = Announcement.createAnnouncementList(1);
-        viewModel = new ViewModelProvider(getActivity()).get(mainViewModel.class);
 
 
         dbModel.getAllFromDB("announcements", this, Announcement.class);
 
-
-        View appBarMainView = requireActivity().findViewById(R.id.new_post);
-        FloatingActionButton admin_see_button = appBarMainView.findViewById(R.id.new_post);
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view,savedInstanceState);
-        announList = new ArrayList<Announcement>();
         View appBarMainView = requireActivity().findViewById(R.id.new_post);
         FloatingActionButton admin_see_button = appBarMainView.findViewById(R.id.new_post);
 
-        //add this
-        announList = Announcement.createAnnouncementList();
-        user = viewModel.getCurrentUser();
+        
+
         if (user instanceof Admin) {
             admin_see_button.setVisibility(View.VISIBLE);
             admin_see_button.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +109,7 @@ public class AnnouncementsFragment extends Fragment implements OnItemClickListen
     public void onItemClick(int position) {
         /*
         if (announList == null){
+
         }
 
         Announcement clickedAnnoun = announList.get(position);
@@ -132,10 +120,10 @@ public class AnnouncementsFragment extends Fragment implements OnItemClickListen
 
         NavHostFragment.findNavController(AnnouncementsFragment.this)
                 .navigate(R.id.action_nav_announcements_to_nav_postannoun, bundle);
+
          */
+
     }
-
-
 
     @Override
     public void loadDataFromDB(List<Object> items) {
