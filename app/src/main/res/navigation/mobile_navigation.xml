@@ -132,6 +132,15 @@
     </fragment>
 
     <fragment
+        android:id="@+id/send_rsvp"
+        android:name="com.example.b07finalproject.ui.events.SendRSVPFragment"
+        tools:layout="@layout/fragment_send_rsvp">
+        <action
+            android:id="@+id/action_send_rsvp_to_submitted"
+            app:destination="@+id/rsvp_submitted"/>
+    </fragment>
+
+    <fragment
         android:id="@+id/new_event_item"
         android:name="com.example.b07finalproject.ui.events.NewEventItemFragment"
         tools:layout="@layout/fragment_event_item"/>
