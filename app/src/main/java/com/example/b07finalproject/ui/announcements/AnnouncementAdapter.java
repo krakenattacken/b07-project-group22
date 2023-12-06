@@ -20,7 +20,9 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
     PostAnnounFragment postAnnounFragment;
 
     public AnnouncementAdapter(List<Announcement> announcements, OnItemClickListener onItemClickListener) {
-        this.announcements = new ArrayList<>();
+
+        this.announcements = announcements;
+
         this.onItemClickListener = onItemClickListener;
     }
     public static class ViewHolder extends RecyclerView.ViewHolder {

@@ -5,7 +5,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.b07finalproject.ui.login.Student;
 import com.example.b07finalproject.ui.login.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,6 +43,7 @@ public class mainDBModel {
                     Object item = shot.getValue(itemClass);
                     itemsList.add(item);
                 }
+
                 presenter.loadDataFromDB(itemsList);
             }
 

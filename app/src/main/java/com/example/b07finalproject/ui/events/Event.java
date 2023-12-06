@@ -3,17 +3,17 @@ package com.example.b07finalproject.ui.events;
 import com.example.b07finalproject.ui.login.Student;
 import com.example.b07finalproject.ui.login.User;
 import com.example.b07finalproject.ui.occasion.Occasion;
-
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 //note: will likely make a superclass for event and announcement...
+
 public class Event extends Occasion implements Serializable {
     private int attendees;
     private int capacity;
@@ -22,6 +22,7 @@ public class Event extends Occasion implements Serializable {
     public Event() {
         this.students = new ArrayList<String>();
     }
+
     public Event(String name, String time,
                  String location, String description, int capacity) {
         super(name, time, location, description);
@@ -30,6 +31,7 @@ public class Event extends Occasion implements Serializable {
     }
 
     //methods to be added as needed
+
 
     public int getAttendees() { return attendees;}
 

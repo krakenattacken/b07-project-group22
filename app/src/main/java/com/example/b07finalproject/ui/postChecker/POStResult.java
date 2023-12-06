@@ -2,34 +2,70 @@ package com.example.b07finalproject.ui.postChecker;
 
 import android.content.res.Resources;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.b07finalproject.R;
+import com.example.b07finalproject.ui.viewmodel.SatisfactionViewModel;
 
-import java.util.Arrays;
-
-
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link POStResult#newInstance} factory method to
+ * create an instance of this fragment.
+ */
 public class POStResult extends Fragment {
 
-    private String category;
-    private boolean[] results;
+    private SatisfactionViewModel satisfactionViewModel;
+    private LiveData<Boolean> receivedSatisfaction;
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
 
     public POStResult() {
-        results = new boolean[4];
+        // Required empty public constructor
+    }
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment POStResult.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static POStResult newInstance(String param1, String param2) {
+        POStResult fragment = new POStResult();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        satisfactionViewModel = new ViewModelProvider(requireActivity())
+                .get(SatisfactionViewModel.class);
+        receivedSatisfaction = satisfactionViewModel.getSatisfied();
+
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
     }
 
     @Override
@@ -39,111 +75,24 @@ public class POStResult extends Fragment {
         return inflater.inflate(R.layout.fragment_post_result, container, false);
     }
 
-    private void updateLayout(View view){
+    private void updateLayout(View view, boolean satisfied){
         Resources resources = getResources();
-        TextView minorTextView = (TextView) view.findViewById(R.id.minor_result);
-        TextView majorTextView = (TextView) view.findViewById(R.id.major_result);
-        TextView specialistTextView = (TextView) view.findViewById(R.id.specialist_result);
-        String csString = resources.getString(R.string.computer_science);
-        String mathString = resources.getString(R.string.math);
-        String statsString = resources.getString(R.string.statistics);
-
-        if (category.equals(csString)) {
-            if (results[0]) {
-                minorTextView.setText(resources.getString(R.string.cs_minor_success_message));
-            }
-            else {
-                minorTextView.setText(resources.getString(R.string.cs_minor_fail_message));
-            }
-
-            if (results[1]) {
-                majorTextView.setText(resources.getString(R.string.cs_major_success_message));
-            }
-            else {
-                majorTextView.setText(resources.getString(R.string.cs_major_fail_message));
-            }
-
-            if (results[2]) {
-                specialistTextView.setText(resources.getString(R.string.cs_specialist_success_message));
-            }
-            else {
-                specialistTextView.setText(resources.getString(R.string.cs_specialist_fail_message));
-            }
+        TextView messageTextView = (TextView) view.findViewById(R.id.post_result);
+        if(satisfied){
+            messageTextView.setText(resources.getString(R.string.post_success_message));
         }
-
-        else if (category.equals(mathString)) {
-            if (results[0]) {
-                minorTextView.setText(resources.getString(R.string.math_minor_success_message));
-            }
-            else {
-                minorTextView.setText(resources.getString(R.string.math_minor_fail_message));
-            }
-
-            if (results[1]) {
-                majorTextView.setText(resources.getString(R.string.math_major_success_message));
-            }
-            else {
-                majorTextView.setText(resources.getString(R.string.math_major_fail_message));
-            }
-
-            if (results[2]) {
-                specialistTextView.setText(resources.getString(R.string.math_specialist_success_message));
-            }
-            else {
-                specialistTextView.setText(resources.getString(R.string.math_specialist_fail_message));
-            }
-        }
-
-        else if (category.equals(statsString)) {
-            TextView machineTextView = (TextView) view.findViewById(R.id.machine_result);
-
-            if (results[0]) {
-                minorTextView.setText(resources.getString(R.string.stats_minor_success_message));
-            }
-            else {
-                minorTextView.setText(resources.getString(R.string.stats_minor_fail_message));
-            }
-
-            if (results[1]) {
-                majorTextView.setText(resources.getString(R.string.stats_major_success_message));
-            }
-            else {
-                majorTextView.setText(resources.getString(R.string.stats_major_fail_message));
-            }
-
-            if (results[2]) {
-                specialistTextView.setText(resources.getString(R.string.stats_specialist_success_message));
-            }
-            else {
-                specialistTextView.setText(resources.getString(R.string.stats_specialist_fail_message));
-            }
-
-            if (results[3]) {
-                machineTextView.setText(resources.getString(R.string.
-                        stats_machine_specialist_success_message));
-            }
-            else {
-                machineTextView.setText(resources.getString(R.string.
-                        stats_machine_specialist_fail_message));
-            }
+        else{
+            messageTextView.setText(resources.getString(R.string.post_fail_message));
         }
 
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-        // want to change view depending on val received so in onViewCreated
-        Bundle receivedBundle = getArguments();
-        if (receivedBundle != null) {
-            String category = receivedBundle.getString("category_string");
-            boolean[] results = receivedBundle.getBooleanArray("result_array");
 
-            this.category = category;
-            this.results = results;
-        }
-        Log.d("FragmentCreate", "results: " + Arrays.toString(results));
-
-        updateLayout(view);
+        receivedSatisfaction.observe(getViewLifecycleOwner(), satisfied -> {
+            // Update the layout depending on the satisfaction
+            updateLayout(view, satisfied);
+        });
     }
 }

@@ -52,11 +52,6 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
 
-
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
-    implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
-    implementation("com.google.firebase:firebase-analytics")
-    implementation("com.google.firebase:firebase-database")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.mockito:mockito-core:4.7.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

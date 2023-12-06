@@ -5,9 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.TextView;
+
+
 import androidx.fragment.app.Fragment;
 
 import com.example.b07finalproject.R;
+import com.example.b07finalproject.mainDBModel;
+import com.example.b07finalproject.ui.login.User;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +25,11 @@ import com.example.b07finalproject.R;
 
 
 public class AnnouncementItemFragment extends Fragment {
+
+
+    private Announcement announcement;
+    private User user;
+    private mainDBModel dbModel;
 
     public AnnouncementItemFragment() {
         // Required empty public constructor
@@ -32,6 +45,9 @@ public class AnnouncementItemFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        dbModel = new mainDBModel();
+
     }
 
     @Override
@@ -41,3 +57,4 @@ public class AnnouncementItemFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_announ_item, container, false);
     }
 }
+

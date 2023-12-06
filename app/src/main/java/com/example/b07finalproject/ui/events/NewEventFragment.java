@@ -1,17 +1,21 @@
 package com.example.b07finalproject.ui.events;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+
+import com.example.b07finalproject.R;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,8 +33,7 @@ import com.example.b07finalproject.ui.login.User;
 import com.example.b07finalproject.ui.viewmodel.CategoryViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class NewEventFragment extends Fragment implements OnItemClickListener, DBDependent {
@@ -39,8 +42,6 @@ public class NewEventFragment extends Fragment implements OnItemClickListener, D
     private List<Event> eventList;
     private mainDBModel dbModel;
     private mainViewModel viewModel;
-
-    User user;
 
     public static NewEventFragment newInstance() {
         return new NewEventFragment();
@@ -54,9 +55,8 @@ public class NewEventFragment extends Fragment implements OnItemClickListener, D
     }
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_new_event, container, false);
-
         //get ref to recyclerView,
         RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.rvNewEvents);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -73,9 +73,6 @@ public class NewEventFragment extends Fragment implements OnItemClickListener, D
         });
         return root;
     }
-
-
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -148,6 +145,5 @@ public class NewEventFragment extends Fragment implements OnItemClickListener, D
 
     @Override
     public void onDBFail(String reason) {
-
     }
 }

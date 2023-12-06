@@ -11,7 +11,6 @@ public class AnnouncementsViewModel extends ViewModel {
     MutableLiveData<List<Announcement>> announList;
 
 
-
     List<Announcement> x;
     Announcement e;
 

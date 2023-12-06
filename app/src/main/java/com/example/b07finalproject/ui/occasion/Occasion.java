@@ -33,7 +33,6 @@ public class Occasion {
         return name;
     }
 
-
     public String getTime() {
         return time;
     }

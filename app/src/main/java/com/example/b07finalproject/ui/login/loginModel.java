@@ -3,20 +3,17 @@ package com.example.b07finalproject.ui.login;
 import androidx.annotation.NonNull;
 
 import com.example.b07finalproject.R;
-import com.example.b07finalproject.ui.login.loginPresenter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.EventListener;
-
 public class loginModel {
     FirebaseDatabase db;
 
     public loginModel(){
-        db = FirebaseDatabase.getInstance("https://bo7app-default-rtdb.firebaseio.com/");
+        db = FirebaseDatabase.getInstance("https://bo7app-default-rtdb.firebaseio.com");
     }
 
     public void queryDB(loginPresenter presenter, String username, String password){
