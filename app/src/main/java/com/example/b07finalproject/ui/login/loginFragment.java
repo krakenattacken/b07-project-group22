@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,8 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.example.b07finalproject.R;
+import com.example.b07finalproject.mainViewModel;
 
 public class loginFragment extends Fragment {
 
@@ -22,6 +26,7 @@ public class loginFragment extends Fragment {
     EditText passwordInput;
     loginPresenter presenter;
     Switch adminSwitch;
+    private mainViewModel viewModel;
     public loginFragment() {
         // Required empty public constructor
     }
@@ -35,6 +40,7 @@ public class loginFragment extends Fragment {
         passwordInput = loginView.findViewById(R.id.passwordText);
         adminSwitch = loginView.findViewById(R.id.admin_switch);
         presenter = new loginPresenter(new loginModel(), this);
+        viewModel = new ViewModelProvider(getActivity()).get(mainViewModel.class);
         return loginView;
     }
 
@@ -55,5 +61,20 @@ public class loginFragment extends Fragment {
                         passwordInput.getText().toString(), adminSwitch.isChecked());
             }
         });
+    }
+
+    public void setUsernameError(int messageID){
+        usernameInput.setError(getResources().getString(messageID));
+    }
+
+    public void setPasswordError(int messageID){
+        passwordInput.setError(getResources().getString(messageID));
+    }
+
+    public void displayLogin(User user){
+        Toast.makeText(getContext(), getResources().getString(R.string.welcome_user)
+                + " " + user + "!", Toast.LENGTH_SHORT).show();
+        NavHostFragment.findNavController(this).navigate(R.id.nav_home);
+        viewModel.currentUser = user;
     }
 }

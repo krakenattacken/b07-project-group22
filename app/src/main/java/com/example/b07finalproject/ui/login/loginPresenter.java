@@ -13,7 +13,6 @@ import com.example.b07finalproject.mainViewModel;
 public class loginPresenter {
     loginModel model;
     loginFragment view;
-    private mainViewModel viewModel;
 
     public loginPresenter(loginModel model, loginFragment view){
         this.model = model;
@@ -45,10 +44,10 @@ public class loginPresenter {
         }
     }
     public void setUsernameError(int messageID){
-        view.usernameInput.setError(view.getResources().getString(messageID));
+        view.setUsernameError(messageID);
     }
     public void setPasswordError(int messageID){
-        view.passwordInput.setError(view.getResources().getString(messageID));
+        view.setPasswordError(messageID);
     }
 
     public void login(User user){
@@ -60,6 +59,6 @@ public class loginPresenter {
 
         NavHostFragment.findNavController(view).navigate(R.id.nav_home, bundle);
         viewModel = new ViewModelProvider(view.getActivity()).get(mainViewModel.class);
-        viewModel.currentUser = user;
+        view.displayLogin(user);
     }
 }

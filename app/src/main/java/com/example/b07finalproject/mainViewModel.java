@@ -18,7 +18,7 @@ public class mainViewModel extends ViewModel {
     }
 
     public void updateUser(User user){
-
+        model.updateUser(user);
     }
 
     /*
@@ -32,10 +32,23 @@ public class mainViewModel extends ViewModel {
     }
 
     public void addToDB(Object item, String path, String id, DBDependent presenter){
-        model.tryToAdd(item, path, id, presenter, this);
+        model.tryToAdd(item, path, id, presenter);
+        if ("events".equals(path)){
+            model.add("events","notifications", "notifs");
+        }
+        else if ("announcements".equals(path) || "announcement".equals(path)){
+            model.add("announcements","notifications", "notifs");
+        }
     }
 
     public void removeFromDB(String path, String id){
         model.remove(path, id);
     }
+
+    public void startNotif(MainActivity main){
+        model.add("","notifications", "notifs");
+        model.startNotif(main);
+    }
 }
+
+
