@@ -75,6 +75,10 @@ public class AnnouncementsFragment extends Fragment implements OnItemClickListen
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
+
+        View appBarMainView = requireActivity().findViewById(R.id.new_post);
+        FloatingActionButton admin_see_button = appBarMainView.findViewById(R.id.new_post);
+        admin_see_button.setVisibility(View.GONE);
         super.onViewCreated(view,savedInstanceState);
         user = viewModel.getCurrentUser();
         announList = new ArrayList<Announcement>();
@@ -84,25 +88,6 @@ public class AnnouncementsFragment extends Fragment implements OnItemClickListen
 
 
         dbModel.getAllFromDB("announcements", this, Announcement.class);
-
-        View appBarMainView = requireActivity().findViewById(R.id.new_post);
-        FloatingActionButton admin_see_button = appBarMainView.findViewById(R.id.new_post);
-
-        
-
-        if (user instanceof Admin) {
-            admin_see_button.setVisibility(View.VISIBLE);
-            admin_see_button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    NavHostFragment.findNavController(AnnouncementsFragment.this)
-                            .navigate(R.id.action_nav_announcements_to_nav_postannoun);
-                }
-            });
-        }
-        else {
-            admin_see_button.setVisibility(View.GONE);
-        }
     }
 
     @Override
@@ -140,6 +125,19 @@ public class AnnouncementsFragment extends Fragment implements OnItemClickListen
         AnnouncementAdapter mAdapter = new AnnouncementAdapter(announList, this);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        View appBarMainView = requireActivity().findViewById(R.id.new_post);
+        FloatingActionButton admin_see_button = appBarMainView.findViewById(R.id.new_post);
+        if (user instanceof Admin) {
+            admin_see_button.setVisibility(View.VISIBLE);
+            admin_see_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    NavHostFragment.findNavController(AnnouncementsFragment.this)
+                            .navigate(R.id.action_nav_announcements_to_nav_postannoun);
+                }
+            });
+        }
 
     }
 

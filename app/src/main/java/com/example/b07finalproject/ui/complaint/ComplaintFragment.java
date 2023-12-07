@@ -35,17 +35,11 @@ public class ComplaintFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(mainViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(ComplaintViewModel.class);
         return inflater.inflate(R.layout.fragment_complaint, container, false);
 
 
 
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ComplaintViewModel.class);
-        // TODO: Use the ViewModel
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {

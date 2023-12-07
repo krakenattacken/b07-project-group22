@@ -125,17 +125,16 @@ public class NewEventFragment extends Fragment implements OnItemClickListener, D
         EventAdapter mAdapter = new EventAdapter(eventList, this);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
+        View appBarMainView = requireActivity().findViewById(R.id.new_post_event);
+        FloatingActionButton admin_see_button = appBarMainView.findViewById(R.id.new_post_event);
 
         if (user instanceof Admin) {
-            View appBarMainView = requireActivity().findViewById(R.id.app_bar_main);
-            FloatingActionButton fab = appBarMainView.findViewById(R.id.fab);
-            if (fab != null) {
-                fab.setVisibility(View.VISIBLE);
-                fab.setOnClickListener(new View.OnClickListener() {
+            if (admin_see_button != null) {
+                admin_see_button.setVisibility(View.VISIBLE);
+                admin_see_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        fab.setVisibility(View.INVISIBLE);
+                        //admin_see_button.setVisibility(View.INVISIBLE);
                         NavHostFragment.findNavController(NewEventFragment.this)
                                 .navigate(R.id.action_newevents_to_send_rsvp);
                     }
@@ -143,6 +142,9 @@ public class NewEventFragment extends Fragment implements OnItemClickListener, D
             } else {
                 Log.e("NewEventFragment", "FAB is null");
             }
+        }
+        else {
+            admin_see_button.setVisibility(View.GONE);
         }
 
     }
