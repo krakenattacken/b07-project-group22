@@ -7,24 +7,24 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:title="@string/menu_home" />
+            android:title="@string/menu_home"
+            android:icon = "@drawable/baseline_home_24" />
 
         <item
             android:id="@+id/nav_announcements"
-            android:title="@string/menu_announcements" />
+            android:title="@string/menu_announcements"
+            android:icon = "@drawable/baseline_announcement_24"/>
 
-
-        <item
-            android:id = "@+id/nav_complaint"
-            android:title = "Complaint" />
 
         <item
             android:id="@+id/nav_post_checker"
-            android:title="@string/menu_post" />
+            android:title="@string/menu_post"
+            android:icon = "@drawable/baseline_check_24"/>
 
         <item
             android:id="@+id/nav_new_events"
-            android:title="@string/menu_new_events" />
+            android:title="@string/menu_new_events"
+            android:icon="@drawable/baseline_calendar_month_24"/>
 
     </group>
 </menu>

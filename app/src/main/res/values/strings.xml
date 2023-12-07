@@ -12,10 +12,7 @@
     <string name="menu_slideshow">Slideshow</string>
 
     <string name="submission_message">Thank you for submitting your feedback! Your comments have been recorded and you may navigate away now!</string>
-    <array name="complaints">
-        <item>Complaint 1</item>
-        <item>Complaint 2</item>
-    </array>
+
 
     <string name="menu_announcements">Announcements</string>
     <string name="menu_postannoun">Post Announcements</string>
@@ -72,7 +69,7 @@
     <string name="give_comment">What was good/bad about the event?</string>
     <string name="give_rating">Rate the event from 1 - 5</string>
     <string name="complaint_disclaimer">Complaints cannot be changed once you submit them.</string>
-
+    <string name="home_welcome_message">Enhance your student experience with the official UTSC CMS Department mobile application! Stay connected, informed, and engaged with everything happening in the department.</string>
 
     <string-array name="rating_array">
         <item>1</item>
