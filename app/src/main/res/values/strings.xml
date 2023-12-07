@@ -46,12 +46,69 @@
     <string name="computer_science">Computer Science</string>
     <string name="math">Mathematics</string>
     <string name="statistics">Statistics</string>
+
+    <string name="none">None of the above</string>
+    <string name="select">--select--</string>
+    <string name="a08">CSC A08</string>
+    <string name="a20">CSC A20</string>
+    <string name="a48">CSC A48</string>
+    <string name="a67">CSC/MAT A67</string>
+    <string name="a22">MAT A22</string>
+    <string name="a23">MAT A23</string>
+    <string name="a30">MAT A30</string>
+    <string name="a31">MAT A31</string>
+    <string name="a32">MAT A32</string>
+    <string name="a36">MAT A36</string>
+    <string name="a37">MAT A37</string>
+
     <!-- array for dropdown -->
     <string-array name="category_array">
         <item>@string/computer_science</item>
         <item>@string/math</item>
         <item>@string/statistics</item>
     </string-array>
+
+    <string-array name="a08_array">
+        <item>@string/select</item>
+        <item>@string/a08</item>
+        <item>@string/a20</item>
+        <item>@string/none</item>
+    </string-array>
+
+    <string-array name="a48_array">
+        <item>@string/select</item>
+        <item>@string/a48</item>
+        <item>@string/none</item>
+    </string-array>
+
+    <string-array name="a67_array">
+        <item>@string/select</item>
+        <item>@string/a67</item>
+        <item>@string/none</item>
+    </string-array>
+
+    <string-array name="a22_array">
+        <item>@string/select</item>
+        <item>@string/a22</item>
+        <item>@string/a23</item>
+        <item>@string/none</item>
+    </string-array>
+
+    <string-array name="a31_array">
+        <item>@string/select</item>
+        <item>@string/a30</item>
+        <item>@string/a31</item>
+        <item>@string/a32</item>
+        <item>@string/none</item>
+    </string-array>
+
+    <string-array name="a37_array">
+        <item>@string/select</item>
+        <item>@string/a36</item>
+        <item>@string/a37</item>
+        <item>@string/none</item>
+    </string-array>
+
     <string name="menu_post">POSt Checker</string>
     <string name="next">next</string>
     <string name="submit">submit</string>
@@ -61,6 +118,58 @@
     <string name="post_success_message">Congratulations! You meet the POSt requirements!</string>
     <string name="post_fail_message">Unfortunately, you are not qualified for the POSt...</string>
 
+
+    <string name="cs_minor_success_message">Computer Science Minor:
+        You are qualified for CS Minor!</string>
+    <string name="cs_minor_fail_message">Computer Science Minor:
+        You are not qualified for CS Minor...</string>
+    <string name="stats_minor_success_message">Statistics Minor:
+        You are qualified for Statistics Minor!</string>
+    <string name="stats_minor_fail_message">Statistics Minor:
+        You are not qualified for Statistics Minor...</string>
+    <string name="math_minor_success_message">Mathematics Minor:
+        You are qualified for Math Minor!</string>
+    <string name="math_minor_fail_message">Mathematics Minor:
+        You are not qualified for Math Minor!</string>
+    <string name="cs_major_success_message">Computer Science Major:
+        You are qualified for CS Major!</string>
+    <string name="cs_major_fail_message">Computer Science Major:
+        You are not qualified for CS Major...</string>
+    <string name="stats_major_success_message">Statistics Major:
+        You are qualified for Statistics Major!</string>
+    <string name="stats_major_fail_message">Statistics Major:
+        You are not qualified for Statistics Major...</string>
+    <string name="math_major_success_message">Mathematics Major:
+        You are qualified for Math Major!</string>
+    <string name="math_major_fail_message">Mathematics Major:
+        You are not qualified for Math Major...</string>
+    <string name="cs_specialist_success_message">Computer Science Specialist:
+        You are qualified for CS Specialist!\n
+        You will be admitted to your choice of the Computer Science Major or the Software
+        Engineering and Comprehensive Streams</string>
+    <string name="cs_specialist_fail_message">Computer Science Specialist:
+        You are not qualified for CS Specialist...</string>
+    <string name="stats_specialist_success_message">Statistics Specialist:
+        You are qualified for Statistics Specialist!</string>
+    <string name="stats_specialist_fail_message">Statistics Specialist:
+        You are not qualified any for Statistics Specialist...</string>
+    <string name="stats_machine_specialist_success_message">You are also qualified for
+        Machine Learning and Data Specialist Stream! </string>
+    <string name="stats_machine_specialist_fail_message"> </string>
+    <string name="math_specialist_success_message">Mathematics Specialist:
+        You are qualified for Math Specialist! \n
+        You will be admitted to any stream of the Mathematics Specialist.</string>
+    <string name="math_specialist_fail_message">Mathematics Specialist:
+        You are not qualified for Mathematics Specialist...</string>
+
+    <string name="a67_grade">What is your grade for CSC/MAT A67?</string>
+    <string name="a48_grade">What is your grade for CSC A48?</string>
+    <string name="a22_grade">What is your grade for MAT A22?</string>
+    <string name="a31_grade">What is your grade for MAT A31?</string>
+    <string name="a37_grade">What is your grade for MAT A37?</string>
+
+    <string name="select_courses">Select the courses you took, and type the grade you got </string>
+    <string name="check_credit">Do you have 4.0+ credits?</string>
 
     <string name="menu_new_events">Upcoming Events</string>
     <string name="new_event">Add New Event</string>
