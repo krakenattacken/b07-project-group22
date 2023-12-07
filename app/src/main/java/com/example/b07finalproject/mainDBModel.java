@@ -58,7 +58,7 @@ public class mainDBModel {
 
     public void tryToAdd(Object item, String path, String id, DBDependent presenter){
         DatabaseReference ref = db.getReference().child(path);
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(id).exists()){
@@ -87,9 +87,11 @@ public class mainDBModel {
                 }
                 if ("events".equals(notifType)){
                     main.showNotif(R.string.notif_event);
+                    ref.child("notifs").setValue("");
                 }
                 if ("announcements".equals(notifType) ||"announcement".equals(notifType)){
                     main.showNotif(R.string.notif_announce);
+                    ref.child("notifs").setValue("");
                 }
             }
 
@@ -102,6 +104,12 @@ public class mainDBModel {
     public void add(Object item, String path, String id){
         DatabaseReference ref = db.getReference().child(path).child(id);
         ref.setValue(item);
+        if ("events".equals(path)){
+            add("events","notifications", "notifs");
+        }
+        else if ("announcements".equals(path) || "announcement".equals(path)){
+            add("announcements","notifications", "notifs");
+        }
     }
 
     public void remove(String path, String id){
