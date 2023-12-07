@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.b07finalproject.R;
+import com.example.b07finalproject.mainViewModel;
+import com.example.b07finalproject.ui.login.Student;
+import com.example.b07finalproject.ui.login.User;
 import com.example.b07finalproject.ui.viewmodel.CategoryViewModel;
 
 /**
@@ -27,33 +31,16 @@ public class POStChecker extends Fragment implements AdapterView.OnItemSelectedL
     // ViewModel to communicate data
     private CategoryViewModel categoryViewModel;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private mainViewModel viewModel;
+    private User user;
 
     public POStChecker() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment POStChecker.
-     */
-    // TODO: Rename and change types and number of parameters
     public static POStChecker newInstance(String param1, String param2) {
         POStChecker fragment = new POStChecker();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,10 +48,8 @@ public class POStChecker extends Fragment implements AdapterView.OnItemSelectedL
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        viewModel = new ViewModelProvider(requireActivity()).get(mainViewModel.class);
+        user = viewModel.getCurrentUser();
     }
 
     @Override
@@ -87,14 +72,28 @@ public class POStChecker extends Fragment implements AdapterView.OnItemSelectedL
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //Add button
-        Button button = view.findViewById(R.id.button_to_questions);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(POStChecker.this).navigate(R.id.action_post_checker_to_post_questions);
-            }
-        });
+        if (user instanceof Student) {
+            TextView categoryQuestionTextView = view.findViewById(R.id.categoryQuestion);
+            categoryQuestionTextView.setText("What is your admission category?");
+            Spinner spinner = view.findViewById(R.id.category_spinner);
+            spinner.setVisibility(View.VISIBLE);
+            //Add button
+            Button button = view.findViewById(R.id.button_to_questions);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    NavHostFragment.findNavController(POStChecker.this).navigate(R.id.action_post_checker_to_post_questions);
+                }
+            });
+        }
+        else {
+            Spinner spinner = view.findViewById(R.id.category_spinner);
+            spinner.setVisibility(View.INVISIBLE);
+            Button button = view.findViewById(R.id.button_to_questions);
+            button.setVisibility(View.INVISIBLE);
+            TextView categoryQuestionTextView = view.findViewById(R.id.categoryQuestion);
+            categoryQuestionTextView.setText("POSt Checker is only available to students!");
+        }
     }
 
 
